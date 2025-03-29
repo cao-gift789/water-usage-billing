@@ -1,5 +1,8 @@
 package com.waterbilling.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +19,9 @@ public class NotificationType {
 
     @Column(name = "Description", columnDefinition = "TEXT")
     private String description;
+    
+    @OneToMany(mappedBy = "notificationType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Notification> notifications=new ArrayList<>();
 
     // Constructors
     public NotificationType() {
@@ -49,5 +55,16 @@ public class NotificationType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	
+	
 
 }

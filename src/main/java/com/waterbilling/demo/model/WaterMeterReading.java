@@ -3,6 +3,8 @@ package com.waterbilling.demo.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "WaterMeterReading")
@@ -15,7 +17,7 @@ public class WaterMeterReading {
 
     @ManyToOne
     @JoinColumn(name = "WaterMeterID", foreignKey = @ForeignKey(name = "fk_watermeterreading_watermeter"))
-    private WaterMeter waterMeter;
+    private WaterMeter waterMeterReading_waterMeter;
 
     @Column(name = "DateRecorded", nullable = false)
     private LocalDateTime dateRecorded;
@@ -31,19 +33,22 @@ public class WaterMeterReading {
 
     @ManyToOne
     @JoinColumn(name = "RecordedBy", foreignKey = @ForeignKey(name = "fk_watermeterreading_employee"))
-    private Employee recordedBy;
+    private Employee WaterMeterReading_employee;
+    
+    @OneToMany(mappedBy = "invoiceWaterMeterReading_waterMeterReading", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InvoiceWaterMeterReading> waterMeterReading_invoiceWaterMeterReading=new ArrayList<>();
 
     // Constructors
     public WaterMeterReading() {
     }
 
     public WaterMeterReading(WaterMeter waterMeter, BigDecimal previousReading, BigDecimal currentReading, BigDecimal waterUsage, Employee recordedBy) {
-        this.waterMeter = waterMeter;
+        this.waterMeterReading_waterMeter = waterMeter;
         this.dateRecorded = LocalDateTime.now();
         this.previousReading = previousReading;
         this.currentReading = currentReading;
         this.waterUsage = waterUsage;
-        this.recordedBy = recordedBy;
+        this.WaterMeterReading_employee = recordedBy;
     }
 
 	public Integer getReadingId() {
@@ -54,12 +59,23 @@ public class WaterMeterReading {
 		this.readingId = readingId;
 	}
 
-	public WaterMeter getWaterMeter() {
-		return waterMeter;
+	
+
+	public WaterMeter getWaterMeterReading_waterMeter() {
+		return waterMeterReading_waterMeter;
 	}
 
-	public void setWaterMeter(WaterMeter waterMeter) {
-		this.waterMeter = waterMeter;
+	public void setWaterMeterReading_waterMeter(WaterMeter waterMeterReading_waterMeter) {
+		this.waterMeterReading_waterMeter = waterMeterReading_waterMeter;
+	}
+
+	public List<InvoiceWaterMeterReading> getWaterMeterReading_invoiceWaterMeterReading() {
+		return waterMeterReading_invoiceWaterMeterReading;
+	}
+
+	public void setWaterMeterReading_invoiceWaterMeterReading(
+			List<InvoiceWaterMeterReading> waterMeterReading_invoiceWaterMeterReading) {
+		this.waterMeterReading_invoiceWaterMeterReading = waterMeterReading_invoiceWaterMeterReading;
 	}
 
 	public LocalDateTime getDateRecorded() {
@@ -94,12 +110,14 @@ public class WaterMeterReading {
 		this.waterUsage = waterUsage;
 	}
 
-	public Employee getRecordedBy() {
-		return recordedBy;
+	public Employee getWaterMeterReading_employee() {
+		return WaterMeterReading_employee;
 	}
 
-	public void setRecordedBy(Employee recordedBy) {
-		this.recordedBy = recordedBy;
+	public void setWaterMeterReading_employee(Employee waterMeterReading_employee) {
+		WaterMeterReading_employee = waterMeterReading_employee;
 	}
+
+	
 
 }

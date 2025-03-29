@@ -3,6 +3,8 @@ package com.waterbilling.demo.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Invoice")
@@ -13,11 +15,11 @@ public class Invoice {
     @Column(name = "InvoiceID")
     private Integer invoiceId;
 
-    @Column(name = "IssueDate")
-    private LocalDateTime issueDate;
-
-    @Column(name = "DueDate")
-    private LocalDateTime dueDate;
+//    @Column(name = "IssueDate")
+//    private LocalDateTime issueDate;
+//
+//    @Column(name = "DueDate")
+//    private LocalDateTime dueDate;
 
     @Column(name = "PaymentDate")
     private LocalDateTime paymentDate;
@@ -31,19 +33,24 @@ public class Invoice {
 
     @ManyToOne
     @JoinColumn(name = "CreatedBy", foreignKey = @ForeignKey(name = "fk_invoice_employee"))
-    private Employee createdBy;
+    private Employee invoice_employee;
 
     @ManyToOne
     @JoinColumn(name = "PaidBy", foreignKey = @ForeignKey(name = "fk_invoice_user"))
-    private User paidBy;
+    private User invoice_user;
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_invoice_facility"))
-    private Facility facility;
+    private Facility invoice_facility;
 
-    @ManyToOne
-    @JoinColumn(name = "CollectorID", foreignKey = @ForeignKey(name = "fk_invoice_employee_collector"))
-    private Employee collector;
+    @OneToMany(mappedBy = "transaction_invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Transaction> invoice_transaction =new ArrayList<>();
+    
+     					 //invoiceWaterMeterReading_invoice
+    @OneToMany(mappedBy = "invoiceWaterMeterReading_invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InvoiceWaterMeterReading> invoice_invoiceWaterMeterReading=new ArrayList<>();
+    
+    
 
     @Column(name = "CreationDate", updatable = false)
     private LocalDateTime creationDate;
@@ -59,17 +66,34 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(LocalDateTime issueDate, LocalDateTime dueDate, BigDecimal totalAmount, InvoiceStatus status, Employee createdBy, User paidBy, Facility facility, Employee collector) {
-        this.issueDate = issueDate;
-        this.dueDate = dueDate;
+    public Invoice(LocalDateTime issueDate, LocalDateTime dueDate, BigDecimal totalAmount, InvoiceStatus status, Employee createdBy, User paidBy, Facility facility) {
+//        this.issueDate = issueDate;
+//        this.dueDate = dueDate;
         this.totalAmount = totalAmount;
         this.status = status;
-        this.createdBy = createdBy;
-        this.paidBy = paidBy;
-        this.facility = facility;
-        this.collector = collector;
+        this.invoice_employee = createdBy;
+        this.invoice_user = paidBy;
+        this.invoice_facility = facility;
+        
         this.creationDate = LocalDateTime.now();
     }
+
+    
+	public List<Transaction> getInvoice_transaction() {
+		return invoice_transaction;
+	}
+
+	public void setInvoice_transaction(List<Transaction> invoice_transaction) {
+		this.invoice_transaction = invoice_transaction;
+	}
+
+	public List<InvoiceWaterMeterReading> getInvoice_invoiceWaterMeterReading() {
+		return invoice_invoiceWaterMeterReading;
+	}
+
+	public void setInvoice_invoiceWaterMeterReading(List<InvoiceWaterMeterReading> invoice_invoiceWaterMeterReading) {
+		this.invoice_invoiceWaterMeterReading = invoice_invoiceWaterMeterReading;
+	}
 
 	public Integer getInvoiceId() {
 		return invoiceId;
@@ -79,21 +103,21 @@ public class Invoice {
 		this.invoiceId = invoiceId;
 	}
 
-	public LocalDateTime getIssueDate() {
-		return issueDate;
-	}
-
-	public void setIssueDate(LocalDateTime issueDate) {
-		this.issueDate = issueDate;
-	}
-
-	public LocalDateTime getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(LocalDateTime dueDate) {
-		this.dueDate = dueDate;
-	}
+//	public LocalDateTime getIssueDate() {
+//		return issueDate;
+//	}
+//
+//	public void setIssueDate(LocalDateTime issueDate) {
+//		this.issueDate = issueDate;
+//	}
+//
+//	public LocalDateTime getDueDate() {
+//		return dueDate;
+//	}
+//
+//	public void setDueDate(LocalDateTime dueDate) {
+//		this.dueDate = dueDate;
+//	}
 
 	public LocalDateTime getPaymentDate() {
 		return paymentDate;
@@ -119,36 +143,39 @@ public class Invoice {
 		this.status = status;
 	}
 
-	public Employee getCreatedBy() {
-		return createdBy;
+	
+	
+	
+	
+	
+	
+	
+
+	public Employee getInvoice_employee() {
+		return invoice_employee;
 	}
 
-	public void setCreatedBy(Employee createdBy) {
-		this.createdBy = createdBy;
+	public void setInvoice_employee(Employee invoice_employee) {
+		this.invoice_employee = invoice_employee;
 	}
 
-	public User getPaidBy() {
-		return paidBy;
+
+
+	
+	public User getInvoice_user() {
+		return invoice_user;
 	}
 
-	public void setPaidBy(User paidBy) {
-		this.paidBy = paidBy;
+	public void setInvoice_user(User invoice_user) {
+		this.invoice_user = invoice_user;
 	}
 
-	public Facility getFacility() {
-		return facility;
+	public Facility getInvoice_facility() {
+		return invoice_facility;
 	}
 
-	public void setFacility(Facility facility) {
-		this.facility = facility;
-	}
-
-	public Employee getCollector() {
-		return collector;
-	}
-
-	public void setCollector(Employee collector) {
-		this.collector = collector;
+	public void setInvoice_facility(Facility invoice_facility) {
+		this.invoice_facility = invoice_facility;
 	}
 
 	public LocalDateTime getCreationDate() {

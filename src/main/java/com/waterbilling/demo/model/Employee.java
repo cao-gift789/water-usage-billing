@@ -2,6 +2,8 @@ package com.waterbilling.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Employee")
@@ -24,9 +26,9 @@ public class Employee {
     @Column(name = "Email", nullable = false, unique = true, length = 255)
     private String email;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "AccountID", foreignKey = @ForeignKey(name = "fk_employee_account"))
-    private Account account;
+    private Account employee_account;
 
     @Column(name = "StartDate", updatable = false)
     private LocalDateTime startDate;
@@ -34,6 +36,20 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "PositionID", foreignKey = @ForeignKey(name = "fk_employee_position"))
     private Position position;
+    
+    @OneToMany(mappedBy = "news_employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<News> employee_news=new ArrayList<>();
+    
+    
+    @OneToMany(mappedBy = "notification_employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Notification> employee_notification=new ArrayList<>();
+    
+    
+    @OneToMany(mappedBy = "WaterMeterReading_employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<WaterMeterReading>employee_WaterMeterReading=new ArrayList<>();
+    
+    @OneToMany(mappedBy = "invoice_employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Invoice>employee_invoice=new ArrayList<>();
 
     @Column(name = "Image", length = 255)
     private String image;
@@ -47,7 +63,7 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
-        this.account = account;
+        this.employee_account = account;
         this.position = position;
         this.startDate = LocalDateTime.now();
         this.image = image;
@@ -77,6 +93,23 @@ public class Employee {
 		this.phoneNumber = phoneNumber;
 	}
 
+	
+	public List<WaterMeterReading> getEmployee_WaterMeterReading() {
+		return employee_WaterMeterReading;
+	}
+
+	public void setEmployee_WaterMeterReading(List<WaterMeterReading> employee_WaterMeterReading) {
+		this.employee_WaterMeterReading = employee_WaterMeterReading;
+	}
+
+	public List<Invoice> getEmployee_invoice() {
+		return employee_invoice;
+	}
+
+	public void setEmployee_invoice(List<Invoice> employee_invoice) {
+		this.employee_invoice = employee_invoice;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -93,12 +126,12 @@ public class Employee {
 		this.email = email;
 	}
 
-	public Account getAccount() {
-		return account;
+	public Account getEmployee_account() {
+		return employee_account;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setEmployee_account(Account employee_account) {
+		this.employee_account = employee_account;
 	}
 
 	public LocalDateTime getStartDate() {
@@ -117,6 +150,23 @@ public class Employee {
 		this.position = position;
 	}
 
+	
+	public List<News> getEmployee_news() {
+		return employee_news;
+	}
+
+	public void setEmployee_news(List<News> employee_news) {
+		this.employee_news = employee_news;
+	}
+
+	public List<Notification> getEmployee_notification() {
+		return employee_notification;
+	}
+
+	public void setEmployee_notification(List<Notification> employee_notification) {
+		this.employee_notification = employee_notification;
+	}
+
 	public String getImage() {
 		return image;
 	}
@@ -124,5 +174,7 @@ public class Employee {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	
 
 }

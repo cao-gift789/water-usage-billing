@@ -1,5 +1,8 @@
 package com.waterbilling.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,11 +23,9 @@ public class Permission {
     // Constructors
     public Permission() {
     }
-
-    public Permission(String permissionName, String description) {
-        this.permissionName = permissionName;
-        this.description = description;
-    }
+   
+    @OneToMany(mappedBy = "permissionRole_permission", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RolePermission> permission_permissionRole =new ArrayList<>();
 
 	public Integer getPermissionId() {
 		return permissionId;
@@ -49,5 +50,15 @@ public class Permission {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public List<RolePermission> getPermission_permissionRole() {
+		return permission_permissionRole;
+	}
+
+	public void setPermission_permissionRole(List<RolePermission> permission_permissionRole) {
+		this.permission_permissionRole = permission_permissionRole;
+	}
+
+   
 
 }

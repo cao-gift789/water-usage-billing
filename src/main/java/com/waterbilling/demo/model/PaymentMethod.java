@@ -1,5 +1,8 @@
 package com.waterbilling.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +19,9 @@ public class PaymentMethod {
 
     @Column(name = "Description", columnDefinition = "TEXT")
     private String description;
+    
+    @OneToMany(mappedBy = "transaction_paymentMethod", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Transaction> paymentMethod_transaction=new ArrayList<>();
 
     // Constructors
     public PaymentMethod() {
@@ -26,8 +32,18 @@ public class PaymentMethod {
         this.description = description;
     }
 
+    
 	public Integer getPaymentMethodId() {
 		return paymentMethodId;
+	}
+
+	
+	public List<Transaction> getPaymentMethod_transaction() {
+		return paymentMethod_transaction;
+	}
+
+	public void setPaymentMethod_transaction(List<Transaction> paymentMethod_transaction) {
+		this.paymentMethod_transaction = paymentMethod_transaction;
 	}
 
 	public void setPaymentMethodId(Integer paymentMethodId) {

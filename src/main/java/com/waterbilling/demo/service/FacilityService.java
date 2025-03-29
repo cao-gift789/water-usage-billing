@@ -19,8 +19,8 @@ public class FacilityService {
         return facilityRepository.findAll();
     }
 
-    public List<Facility> getFacilitiesByOwner(User owner) {
-        return facilityRepository.findByOwner(owner);
+    public List<Facility> getFacilitiesByOwner(User facility_user) {
+        return facilityRepository.findAll();
     }
 
     public Optional<Facility> getFacilityById(Integer id) {

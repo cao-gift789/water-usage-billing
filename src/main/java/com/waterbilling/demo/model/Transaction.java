@@ -15,11 +15,12 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "InvoiceID", foreignKey = @ForeignKey(name = "fk_transaction_invoice"))
-    private Invoice invoice;
+    private Invoice transaction_invoice;
+    
 
     @ManyToOne
     @JoinColumn(name = "PaymentMethodID", foreignKey = @ForeignKey(name = "fk_transaction_paymentmethod"))
-    private PaymentMethod paymentMethod;
+    private PaymentMethod transaction_paymentMethod;
 
     @Column(name = "Amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
@@ -43,8 +44,8 @@ public class Transaction {
     }
 
     public Transaction(Invoice invoice, PaymentMethod paymentMethod, BigDecimal amount, TransactionStatus status, String referenceCode) {
-        this.invoice = invoice;
-        this.paymentMethod = paymentMethod;
+        this.transaction_invoice = invoice;
+        this.transaction_paymentMethod = paymentMethod;
         this.amount = amount;
         this.status = status;
         this.transactionDate = LocalDateTime.now();
@@ -59,20 +60,22 @@ public class Transaction {
 		this.transactionId = transactionId;
 	}
 
-	public Invoice getInvoice() {
-		return invoice;
+	
+
+	public Invoice getTransaction_invoice() {
+		return transaction_invoice;
 	}
 
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
+	public void setTransaction_invoice(Invoice transaction_invoice) {
+		this.transaction_invoice = transaction_invoice;
 	}
 
-	public PaymentMethod getPaymentMethod() {
-		return paymentMethod;
+	public PaymentMethod getTransaction_paymentMethod() {
+		return transaction_paymentMethod;
 	}
 
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		this.paymentMethod = paymentMethod;
+	public void setTransaction_paymentMethod(PaymentMethod transaction_paymentMethod) {
+		this.transaction_paymentMethod = transaction_paymentMethod;
 	}
 
 	public BigDecimal getAmount() {

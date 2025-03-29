@@ -7,18 +7,15 @@ import java.time.LocalDateTime;
 @Table(name = "LocationManager")
 public class LocationManager {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ManagerID")
-    private Integer managerId;
-
+    
+	@Id
     @ManyToOne
     @JoinColumn(name = "UserID", foreignKey = @ForeignKey(name = "fk_locationmanager_user"))
-    private User user;
+    private User locationManager_user;
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_locationmanager_facility"))
-    private Facility facility;
+    private Facility locationManager_facility;
 
     @Column(name = "GrantedDate", updatable = false)
     private LocalDateTime grantedDate;
@@ -31,34 +28,30 @@ public class LocationManager {
     }
 
     public LocationManager(User user, Facility facility) {
-        this.user = user;
-        this.facility = facility;
+        this.locationManager_user = user;
+        this.locationManager_facility = facility;
         this.grantedDate = LocalDateTime.now();
         this.isActive = true;
     }
 
-	public Integer getManagerId() {
-		return managerId;
+	
+
+	
+
+	public User getLocationManager_user() {
+		return locationManager_user;
 	}
 
-	public void setManagerId(Integer managerId) {
-		this.managerId = managerId;
+	public void setLocationManager_user(User locationManager_user) {
+		this.locationManager_user = locationManager_user;
 	}
 
-	public User getUser() {
-		return user;
+	public Facility getLocationManager_facility() {
+		return locationManager_facility;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Facility getFacility() {
-		return facility;
-	}
-
-	public void setFacility(Facility facility) {
-		this.facility = facility;
+	public void setLocationManager_facility(Facility locationManager_facility) {
+		this.locationManager_facility = locationManager_facility;
 	}
 
 	public LocalDateTime getGrantedDate() {

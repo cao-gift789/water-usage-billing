@@ -1,6 +1,8 @@
 package com.waterbilling.demo.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,10 +20,21 @@ public class Role {
     @Column(name = "Description", columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Account> accounts;
+    @OneToMany(mappedBy = "account_role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Account> role_account =new ArrayList<>();
+    
+    @OneToMany(mappedBy = "rolePermission_role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RolePermission> role_rolePermission=new ArrayList<>();
+    
+    public List<RolePermission> getRolePermissions() {
+		return role_rolePermission;
+	}
 
-    // Constructors
+	public void setRolePermissions(List<RolePermission> rolePermissions) {
+		this.role_rolePermission = rolePermissions;
+	}
+
+	// Constructors
     public Role() {
     }
 
@@ -30,36 +43,45 @@ public class Role {
         this.description = description;
     }
 
-    // Getters and Setters
-    public Integer getRoleId() {
-        return roleId;
-    }
+	public Integer getRoleId() {
+		return roleId;
+	}
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getRoleName() {
-        return roleName;
-    }
+	public String getRoleName() {
+		return roleName;
+	}
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
+	public List<Account> getRole_account() {
+		return role_account;
+	}
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
+	public void setRole_account(List<Account> role_account) {
+		this.role_account = role_account;
+	}
+
+	public List<RolePermission> getRole_rolePermission() {
+		return role_rolePermission;
+	}
+
+	public void setRole_rolePermission(List<RolePermission> role_rolePermission) {
+		this.role_rolePermission = role_rolePermission;
+	}
+
+    
 }

@@ -2,6 +2,8 @@ package com.waterbilling.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "WaterMeter")
@@ -17,21 +19,24 @@ public class WaterMeter {
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_watermeter_facility"))
-    private Facility facility;
+    private Facility waterMeter_facility;
 
     @Column(name = "InstallationDate")
     private LocalDateTime installationDate;
 
     @Column(name = "IsActive")
     private Boolean isActive = true;
+    
+    @OneToMany(mappedBy = "waterMeterReading_waterMeter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<WaterMeterReading> waterMeter_waterMeterReading=new ArrayList<>();
 
     // Constructors
     public WaterMeter() {
     }
 
-    public WaterMeter(String serialNumber, Facility facility, LocalDateTime installationDate) {
+    public WaterMeter(String serialNumber, Facility waterMeter_facility, LocalDateTime installationDate) {
         this.serialNumber = serialNumber;
-        this.facility = facility;
+        this.waterMeter_facility = waterMeter_facility;
         this.installationDate = installationDate;
         this.isActive = true;
     }
@@ -52,12 +57,14 @@ public class WaterMeter {
 		this.serialNumber = serialNumber;
 	}
 
-	public Facility getFacility() {
-		return facility;
+	
+
+	public Facility getWaterMeter_facility() {
+		return waterMeter_facility;
 	}
 
-	public void setFacility(Facility facility) {
-		this.facility = facility;
+	public void setWaterMeter_facility(Facility waterMeter_facility) {
+		this.waterMeter_facility = waterMeter_facility;
 	}
 
 	public LocalDateTime getInstallationDate() {

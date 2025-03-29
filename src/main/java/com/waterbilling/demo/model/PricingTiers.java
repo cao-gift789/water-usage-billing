@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
+import org.hibernate.type.CustomType;
+
 @Entity
 @Table(name = "PricingTiers")
 public class PricingTiers {
@@ -12,10 +14,10 @@ public class PricingTiers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TierID")
     private Integer tierId;
-
-    @ManyToOne
-    @JoinColumn(name = "TypeID", foreignKey = @ForeignKey(name = "fk_pricingtiers_customertype"))
-    private CustomerType customerType;
+    
+    @ManyToOne													//fk_facility_customertype"
+    @JoinColumn(name = "TypeID", foreignKey = @ForeignKey(name = "fk_pricingTier_facilityType"))
+    private FacilityType pricingTier_facilityType;
 
     @Column(name = "MinUsage", nullable = false, precision = 10, scale = 2)
     private BigDecimal minUsage;
@@ -30,8 +32,8 @@ public class PricingTiers {
     public PricingTiers() {
     }
 
-    public PricingTiers(CustomerType customerType, BigDecimal minUsage, BigDecimal maxUsage, BigDecimal pricePerM3) {
-        this.customerType = customerType;
+    public PricingTiers(FacilityType pricingTier_facilityType, BigDecimal minUsage, BigDecimal maxUsage, BigDecimal pricePerM3) {
+        this.pricingTier_facilityType = pricingTier_facilityType;
         this.minUsage = minUsage;
         this.maxUsage = maxUsage;
         this.pricePerM3 = pricePerM3;
@@ -40,17 +42,20 @@ public class PricingTiers {
 	public Integer getTierId() {
 		return tierId;
 	}
-
 	public void setTierId(Integer tierId) {
 		this.tierId = tierId;
 	}
+	
 
-	public CustomerType getCustomerType() {
-		return customerType;
+	
+
+	
+	public FacilityType getPricingTier_facilityType() {
+		return pricingTier_facilityType;
 	}
 
-	public void setCustomerType(CustomerType customerType) {
-		this.customerType = customerType;
+	public void setPricingTier_facilityType(FacilityType pricingTier_facilityType) {
+		this.pricingTier_facilityType = pricingTier_facilityType;
 	}
 
 	public BigDecimal getMinUsage() {

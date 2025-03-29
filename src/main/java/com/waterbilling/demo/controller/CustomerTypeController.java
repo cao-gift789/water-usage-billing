@@ -1,6 +1,6 @@
 package com.waterbilling.demo.controller;
 
-import com.waterbilling.demo.model.CustomerType;
+import com.waterbilling.demo.model.FacilityType;
 import com.waterbilling.demo.service.CustomerTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +15,12 @@ public class CustomerTypeController {
     private CustomerTypeService customerTypeService;
 
     @GetMapping
-    public List<CustomerType> getAllCustomerTypes() {
+    public List<FacilityType> getAllCustomerTypes() {
         return customerTypeService.getAllCustomerTypes();
     }
 
     @PostMapping
-    public CustomerType createCustomerType(@RequestBody CustomerType customerType) {
+    public FacilityType createCustomerType(@RequestBody FacilityType customerType) {
         return customerTypeService.saveCustomerType(customerType);
     }
 }

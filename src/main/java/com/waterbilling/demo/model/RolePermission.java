@@ -9,36 +9,55 @@ public class RolePermission {
     @Id
     @ManyToOne
     @JoinColumn(name = "RoleID", foreignKey = @ForeignKey(name = "fk_role_permission_role"))
-    private Role role;
+    private Role rolePermission_role;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "PermissionID", foreignKey = @ForeignKey(name = "fk_role_permission_permission"))
-    private Permission permission;
+    private Permission permissionRole_permission;
 
-    // Constructors
+    
+
+
+	// Constructors
     public RolePermission() {
     }
 
-    public RolePermission(Role role, Permission permission) {
-        this.role = role;
-        this.permission = permission;
-    }
 
-	public Role getRole() {
-		return role;
+
+
+	public Role getRolePermission_role() {
+		return rolePermission_role;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+
+
+
+	public void setRolePermission_role(Role rolePermission_role) {
+		this.rolePermission_role = rolePermission_role;
 	}
 
-	public Permission getPermission() {
-		return permission;
+
+
+
+	public Permission getPermissionRole_permission() {
+		return permissionRole_permission;
 	}
 
-	public void setPermission(Permission permission) {
-		this.permission = permission;
+
+
+
+	public void setPermissionRole_permission(Permission permissionRole_permission) {
+		this.permissionRole_permission = permissionRole_permission;
 	}
+
+
+
+
+	
+	
+
+    
+
 
 }

@@ -15,7 +15,7 @@ public class FixedPricing {
 
     @ManyToOne
     @JoinColumn(name = "TypeID", foreignKey = @ForeignKey(name = "fk_fixedpricing_customertype"))
-    private CustomerType customerType;
+    private FacilityType fixedPricing_facilityType;
 
     @Column(name = "PricePerM3", nullable = false, precision = 10, scale = 2)
     private BigDecimal pricePerM3;
@@ -24,8 +24,8 @@ public class FixedPricing {
     public FixedPricing() {
     }
 
-    public FixedPricing(CustomerType customerType, BigDecimal pricePerM3) {
-        this.customerType = customerType;
+    public FixedPricing(FacilityType fixedPricing_facilityType, BigDecimal pricePerM3) {
+        this.fixedPricing_facilityType = fixedPricing_facilityType;
         this.pricePerM3 = pricePerM3;
     }
 
@@ -36,13 +36,16 @@ public class FixedPricing {
 	public void setFixedPriceId(Integer fixedPriceId) {
 		this.fixedPriceId = fixedPriceId;
 	}
+	
 
-	public CustomerType getCustomerType() {
-		return customerType;
+	
+
+	public FacilityType getFixedPricing_facilityType() {
+		return fixedPricing_facilityType;
 	}
 
-	public void setCustomerType(CustomerType customerType) {
-		this.customerType = customerType;
+	public void setFixedPricing_facilityType(FacilityType fixedPricing_facilityType) {
+		this.fixedPricing_facilityType = fixedPricing_facilityType;
 	}
 
 	public BigDecimal getPricePerM3() {

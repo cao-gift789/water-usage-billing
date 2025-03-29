@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface FacilityRepository extends JpaRepository<Facility, Integer> {
-    List<Facility> findByOwner(User owner);
+    
 }

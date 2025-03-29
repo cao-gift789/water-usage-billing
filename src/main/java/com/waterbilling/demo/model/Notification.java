@@ -2,6 +2,8 @@ package com.waterbilling.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Notification")
@@ -15,9 +17,7 @@ public class Notification {
     @Column(name = "CreatedDate", updatable = false)
     private LocalDateTime createdDate;
 
-    @ManyToOne
-    @JoinColumn(name = "SenderID", foreignKey = @ForeignKey(name = "fk_notification_employee"))
-    private Employee sender;
+    
 
     @Column(name = "Title", nullable = false, length = 255)
     private String title;
@@ -26,15 +26,22 @@ public class Notification {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "NotificationTypeID", foreignKey = @ForeignKey(name = "fk_notification_type"))
+    @JoinColumn(name = "NotificationTypeID", foreignKey = @ForeignKey(name = "fk_notificationType"))
     private NotificationType notificationType;
+    
+    @ManyToOne
+    @JoinColumn(name = "SenderID", foreignKey = @ForeignKey(name = "fk_notification_employee"))
+    private Employee notification_employee;
+    
+    @OneToMany(mappedBy = "NotificationFacility_Notification", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<NotificationFacility> Notification_NotificationFacility=new ArrayList<>();
 
     // Constructors
     public Notification() {
     }
 
     public Notification(Employee sender, String title, String content, NotificationType notificationType) {
-        this.sender = sender;
+        this.notification_employee = sender;
         this.title = title;
         this.content = content;
         this.notificationType = notificationType;
@@ -57,13 +64,7 @@ public class Notification {
 		this.createdDate = createdDate;
 	}
 
-	public Employee getSender() {
-		return sender;
-	}
-
-	public void setSender(Employee sender) {
-		this.sender = sender;
-	}
+	
 
 	public String getTitle() {
 		return title;
@@ -89,4 +90,26 @@ public class Notification {
 		this.notificationType = notificationType;
 	}
 
+	public Employee getNotification_employee() {
+		return notification_employee;
+	}
+
+	public void setNotification_employee(Employee notification_employee) {
+		this.notification_employee = notification_employee;
+	}
+
+	public List<NotificationFacility> getNotification_NotificationFacility() {
+		return Notification_NotificationFacility;
+	}
+
+	public void setNotification_NotificationFacility(List<NotificationFacility> notification_NotificationFacility) {
+		Notification_NotificationFacility = notification_NotificationFacility;
+	}
+	
+	
+	
+	
+
+
+	
 }

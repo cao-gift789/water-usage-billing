@@ -1,4 +1,4 @@
-package com.waterbilling.demo.model;
+	package com.waterbilling.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -23,20 +23,13 @@ public class News {
 
     @ManyToOne
     @JoinColumn(name = "CreatedBy", foreignKey = @ForeignKey(name = "fk_news_employee"))
-    private Employee createdBy;
+    private Employee news_employee;
 
     @Column(name = "Status")
     private Boolean status = true;
 
     // Constructors
     public News() {
-    }
-
-    public News(String title, String content, Employee createdBy) {
-        this.title = title;
-        this.content = content;
-        this.createdBy = createdBy;
-        this.createdDate = LocalDateTime.now();
     }
 
 	public Integer getNewsId() {
@@ -71,12 +64,12 @@ public class News {
 		this.createdDate = createdDate;
 	}
 
-	public Employee getCreatedBy() {
-		return createdBy;
+	public Employee getNews_employee() {
+		return news_employee;
 	}
 
-	public void setCreatedBy(Employee createdBy) {
-		this.createdBy = createdBy;
+	public void setNews_employee(Employee news_employee) {
+		this.news_employee = news_employee;
 	}
 
 	public Boolean getStatus() {
@@ -86,5 +79,7 @@ public class News {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
+
+    
 
 }

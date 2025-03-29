@@ -45,8 +45,17 @@ public class User {
     @JoinColumn(name = "AccountID", foreignKey = @ForeignKey(name = "fk_user_account"))
     private Account account;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Facility> facilities;
+    @OneToMany(mappedBy = "facility_user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)	
+    private List<Facility> user_facility;
+    
+    @OneToMany(mappedBy = "invoice_user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Invoice> user_invoice;
+    
+    @OneToMany(mappedBy = "locationManager_user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<LocationManager> user_locationManager;
+    
+    @OneToMany(mappedBy = "joinRequest_user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<JoinRequest> user_joinRequest;
 
     // Enum for Gender
     public enum Gender {
@@ -157,11 +166,38 @@ public class User {
         this.account = account;
     }
 
-    public List<Facility> getFacilities() {
-        return facilities;
-    }
+	public List<Facility> getUser_facility() {
+		return user_facility;
+	}
 
-    public void setFacilities(List<Facility> facilities) {
-        this.facilities = facilities;
-    }
+	public void setUser_facility(List<Facility> user_facility) {
+		this.user_facility = user_facility;
+	}
+
+	public List<Invoice> getUser_invoice() {
+		return user_invoice;
+	}
+
+	public void setUser_invoice(List<Invoice> user_invoice) {
+		this.user_invoice = user_invoice;
+	}
+
+	public List<LocationManager> getUser_locationManager() {
+		return user_locationManager;
+	}
+
+	public void setUser_locationManager(List<LocationManager> user_locationManager) {
+		this.user_locationManager = user_locationManager;
+	}
+
+	public List<JoinRequest> getUser_joinRequest() {
+		return user_joinRequest;
+	}
+
+	public void setUser_joinRequest(List<JoinRequest> user_joinRequest) {
+		this.user_joinRequest = user_joinRequest;
+	}
+
+    	
+    
 }

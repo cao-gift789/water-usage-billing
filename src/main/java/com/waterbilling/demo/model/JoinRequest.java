@@ -14,11 +14,11 @@ public class JoinRequest {
 
     @ManyToOne
     @JoinColumn(name = "UserID", foreignKey = @ForeignKey(name = "fk_joinrequest_user"))
-    private User user;
+    private User joinRequest_user;
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_joinrequest_facility"))
-    private Facility facility;
+    private Facility joinRequest_facility;
 
     @Column(name = "RequestDate", updatable = false)
     private LocalDateTime requestDate;
@@ -31,11 +31,11 @@ public class JoinRequest {
 
     // Constructors
     public JoinRequest() {
-    }
+    }	
 
     public JoinRequest(User user, Facility facility, String note) {
-        this.user = user;
-        this.facility = facility;
+        this.joinRequest_user = user;
+        this.joinRequest_facility = facility;
         this.note = note;
         this.requestDate = LocalDateTime.now();
     }
@@ -48,20 +48,22 @@ public class JoinRequest {
 		this.requestId = requestId;
 	}
 
-	public User getUser() {
-		return user;
+	
+
+	public User getJoinRequest_user() {
+		return joinRequest_user;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setJoinRequest_user(User joinRequest_user) {
+		this.joinRequest_user = joinRequest_user;
 	}
 
-	public Facility getFacility() {
-		return facility;
+	public Facility getJoinRequest_facility() {
+		return joinRequest_facility;
 	}
 
-	public void setFacility(Facility facility) {
-		this.facility = facility;
+	public void setJoinRequest_facility(Facility joinRequest_facility) {
+		joinRequest_facility = joinRequest_facility;
 	}
 
 	public LocalDateTime getRequestDate() {

@@ -14,8 +14,8 @@ public class AccountController {
 
     @PostMapping("/create")
     public Account createAccount(@RequestParam String username, 
-                                 @RequestParam String password, 
-                                 @RequestParam String roleName) {
-        return accountService.createAccount(username, password, roleName);
+                                 @RequestParam String password 
+                              ) {
+        return accountService.createAccount(username, password);
     }
 }

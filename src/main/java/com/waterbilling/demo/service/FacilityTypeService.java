@@ -1,27 +1,27 @@
 package com.waterbilling.demo.service;
 
 import com.waterbilling.demo.model.FacilityType;
-import com.waterbilling.demo.repository.CustomerTypeRepository;
+import com.waterbilling.demo.repository.FacilityTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerTypeService {
+public class FacilityTypeService {
 
     @Autowired
-    private CustomerTypeRepository customerTypeRepository;
+    private FacilityTypeRepository facilityTypeRepository;
 
     public List<FacilityType> getAllCustomerTypes() {
-        return customerTypeRepository.findAll();
+        return facilityTypeRepository.findAll();
     }
 
     public FacilityType getCustomerTypeByName(String typeName) {
-        return customerTypeRepository.findByTypeName(typeName);
+        return facilityTypeRepository.findByTypeName(typeName);
     }
 
     public FacilityType saveCustomerType(FacilityType customerType) {
-        return customerTypeRepository.save(customerType);
+        return facilityTypeRepository.save(customerType);
     }
 }

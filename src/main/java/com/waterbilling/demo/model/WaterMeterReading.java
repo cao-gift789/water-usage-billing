@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
 @Table(name = "WaterMeterReading")
 public class WaterMeterReading {
@@ -28,15 +30,18 @@ public class WaterMeterReading {
     @Column(name = "CurrentReading", nullable = false, precision = 10, scale = 2)
     private BigDecimal currentReading;
 
-    @Column(name = "WaterUsage", nullable = false, precision = 10, scale = 2)
+    @Formula("(CurrentReading - PreviousReading)")
     private BigDecimal waterUsage;
 
     @ManyToOne
     @JoinColumn(name = "RecordedBy", foreignKey = @ForeignKey(name = "fk_watermeterreading_employee"))
     private Employee WaterMeterReading_employee;
     
-    @OneToMany(mappedBy = "invoiceWaterMeterReading_waterMeterReading", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InvoiceWaterMeterReading> waterMeterReading_invoiceWaterMeterReading=new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "InvoiceID", foreignKey = @ForeignKey(name = "fk_waterMeterReading_invoice"))
+    private Invoice waterMeterReading_invoice;
+    
+
 
     // Constructors
     public WaterMeterReading() {
@@ -65,18 +70,19 @@ public class WaterMeterReading {
 		return waterMeterReading_waterMeter;
 	}
 
+	public Invoice getWaterMeterReading_invoice() {
+		return waterMeterReading_invoice;
+	}
+
+	public void setWaterMeterReading_invoice(Invoice waterMeterReading_invoice) {
+		this.waterMeterReading_invoice = waterMeterReading_invoice;
+	}
+
 	public void setWaterMeterReading_waterMeter(WaterMeter waterMeterReading_waterMeter) {
 		this.waterMeterReading_waterMeter = waterMeterReading_waterMeter;
 	}
 
-	public List<InvoiceWaterMeterReading> getWaterMeterReading_invoiceWaterMeterReading() {
-		return waterMeterReading_invoiceWaterMeterReading;
-	}
-
-	public void setWaterMeterReading_invoiceWaterMeterReading(
-			List<InvoiceWaterMeterReading> waterMeterReading_invoiceWaterMeterReading) {
-		this.waterMeterReading_invoiceWaterMeterReading = waterMeterReading_invoiceWaterMeterReading;
-	}
+	
 
 	public LocalDateTime getDateRecorded() {
 		return dateRecorded;

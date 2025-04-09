@@ -132,6 +132,10 @@ public class Facility {
 
 	
 
+	public void setFacility_locationManager(List<LocationManager> facility_locationManager) {
+		this.facility_locationManager = facility_locationManager;
+	}
+
 	public List<JoinRequest> getFacility_joinRequest() {
 		return facility_joinRequest;
 	}

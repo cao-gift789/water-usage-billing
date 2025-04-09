@@ -31,4 +31,12 @@ public class AccountService {
     public Optional<Account> findByUsername(String username) {
         return accountRepository.findByUsername(username);
     }
+    public boolean findAccount(String username, String password) {
+    	if(accountRepository.findByUsernameAndPassword(username,password) != null){ 
+    		return true;
+    	}
+    	else {	
+    		return false;
+    	}
+    }
 }

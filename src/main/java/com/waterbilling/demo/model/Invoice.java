@@ -20,13 +20,17 @@ public class Invoice {
 //
 //    @Column(name = "DueDate")
 //    private LocalDateTime dueDate;
-
+    
+    @Column(name="GracePeriod")
+    private LocalDateTime gracePeriod;
+    
     @Column(name = "PaymentDate")
     private LocalDateTime paymentDate;
 
     @Column(name = "TotalAmount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
-
+    
+   
     @Enumerated(EnumType.STRING)
     @Column(name = "Status", nullable = false)
     private InvoiceStatus status;
@@ -40,15 +44,20 @@ public class Invoice {
     private User invoice_user;
 
     @ManyToOne
-    @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_invoice_facility"))
+    @JoinColumn(name = "facilityid", foreignKey = @ForeignKey(name = "fk_invoice_facility"))
     private Facility invoice_facility;
 
     @OneToMany(mappedBy = "transaction_invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Transaction> invoice_transaction =new ArrayList<>();
     
-     					 //invoiceWaterMeterReading_invoice
-    @OneToMany(mappedBy = "invoiceWaterMeterReading_invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InvoiceWaterMeterReading> invoice_invoiceWaterMeterReading=new ArrayList<>();
+    
+     					 
+    
+    @OneToMany(mappedBy = "waterMeterReading_invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<WaterMeterReading> invoice_waterMeterReading=new ArrayList<>();
+    
+//    @OneToMany(mappedBy = "invoiceWaterMeterReading_invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<InvoiceWaterMeterReading> invoice_invoiceWaterMeterReading=new ArrayList<>();
     
     
 
@@ -79,6 +88,16 @@ public class Invoice {
     }
 
     
+    
+	
+	public List<WaterMeterReading> getInvoice_waterMeterReading() {
+		return invoice_waterMeterReading;
+	}
+
+	public void setInvoice_waterMeterReading(List<WaterMeterReading> invoice_waterMeterReading) {
+		this.invoice_waterMeterReading = invoice_waterMeterReading;
+	}
+
 	public List<Transaction> getInvoice_transaction() {
 		return invoice_transaction;
 	}
@@ -87,13 +106,13 @@ public class Invoice {
 		this.invoice_transaction = invoice_transaction;
 	}
 
-	public List<InvoiceWaterMeterReading> getInvoice_invoiceWaterMeterReading() {
-		return invoice_invoiceWaterMeterReading;
-	}
-
-	public void setInvoice_invoiceWaterMeterReading(List<InvoiceWaterMeterReading> invoice_invoiceWaterMeterReading) {
-		this.invoice_invoiceWaterMeterReading = invoice_invoiceWaterMeterReading;
-	}
+//	public List<InvoiceWaterMeterReading> getInvoice_invoiceWaterMeterReading() {
+//		return invoice_invoiceWaterMeterReading;
+//	}
+//
+//	public void setInvoice_invoiceWaterMeterReading(List<InvoiceWaterMeterReading> invoice_invoiceWaterMeterReading) {
+//		this.invoice_invoiceWaterMeterReading = invoice_invoiceWaterMeterReading;
+//	}
 
 	public Integer getInvoiceId() {
 		return invoiceId;
@@ -103,6 +122,7 @@ public class Invoice {
 		this.invoiceId = invoiceId;
 	}
 
+	
 //	public LocalDateTime getIssueDate() {
 //		return issueDate;
 //	}
@@ -118,6 +138,14 @@ public class Invoice {
 //	public void setDueDate(LocalDateTime dueDate) {
 //		this.dueDate = dueDate;
 //	}
+
+	public LocalDateTime getGracePeriod() {
+		return gracePeriod;
+	}
+
+	public void setGracePeriod(LocalDateTime gracePeriod) {
+		this.gracePeriod = gracePeriod;
+	}
 
 	public LocalDateTime getPaymentDate() {
 		return paymentDate;

@@ -49,4 +49,71 @@ public class WaterMeterReading {
 	@JoinColumn(name = "WaterMeterID", foreignKey = @ForeignKey(name = "fk_watermeterreading_watermeter"))
 	WaterMeter waterMeter;
 
+	public Integer getReadingId() {
+		return readingId;
+	}
+
+	public void setReadingId(Integer readingId) {
+		this.readingId = readingId;
+	}
+
+	public LocalDateTime getDateRecorded() {
+		return dateRecorded;
+	}
+
+	public void setDateRecorded(LocalDateTime dateRecorded) {
+		this.dateRecorded = dateRecorded;
+	}
+
+	public BigDecimal getPreviousReading() {
+		return previousReading;
+	}
+
+	public void setPreviousReading(BigDecimal previousReading) {
+		this.previousReading = previousReading;
+	}
+
+	public BigDecimal getCurrentReading() {
+		return currentReading;
+	}
+
+	public void setCurrentReading(BigDecimal currentReading) {
+		this.currentReading = currentReading;
+	}
+
+	public BigDecimal getWaterUsage() {
+		return waterUsage;
+	}
+
+	public void setWaterUsage(BigDecimal waterUsage) {
+		this.waterUsage = waterUsage;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+
+	public WaterMeter getWaterMeter() {
+		return waterMeter;
+	}
+
+	public void setWaterMeter(WaterMeter waterMeter) {
+		this.waterMeter = waterMeter;
+	}
+
+	
+	
+	
 }

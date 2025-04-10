@@ -19,12 +19,12 @@ public class AccountService {
     private RoleRepository roleRepository;
 
 //    public Account createAccount(String username, String password) {
-////        Role role = roleRepository.findByRoleName(roleName);
-////        if (role == null) {
-////            throw new RuntimeException("Role không tồn tại");
-////        }
+//        Role role = roleRepository.findByRoleName(roleName);
+//        if (role == null) {
+//            throw new RuntimeException("Role không tồn tại");
+//        }
 //
-//        Account account = Account.builder().username().
+//       Account account = Account.builder().username().
 //        return accountRepository.save(account);
 //    }
 

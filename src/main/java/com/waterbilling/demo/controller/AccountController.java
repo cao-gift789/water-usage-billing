@@ -19,12 +19,12 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/create")
-    public Account createAccount(@RequestParam String username, 
-                                 @RequestParam String password 
-                                 ) {
-        return accountService.createAccount(username, password);
-    }
+//    @PostMapping("/create")
+//    public Account createAccount(@RequestParam String username, 
+//                                 @RequestParam String password 
+//                                 ) {
+//        return accountService.createAccount(username, password);
+//    }
     
     @DeleteMapping("/{id}")
     public void deleteAccount(@PathVariable Integer id ) {

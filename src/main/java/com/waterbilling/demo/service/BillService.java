@@ -2,7 +2,10 @@ package com.waterbilling.demo.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +40,7 @@ public class BillService {
 		Facility facility = facilityRepository.findById(facilityid)
 			    .orElseThrow(() -> new RuntimeException("Facility not found"));
 		
-		List<Invoice> invoices = facility.getFacility_invoice();
+		Set<Invoice> invoices = facility.getInvoices();
 		for(Invoice item:invoices) {
 			if(item.getStatus() == InvoiceStatus.unpaid) {
 			BillResponse it=new BillResponse();
@@ -45,16 +48,16 @@ public class BillService {
 			it.setHouseholdCode(facilityid);
 			it.setPeriod(item.getCreationDate());
 			it.setStatus(item.getStatus());
-			it.setCustomerName(item.getInvoice_user().getFullName());
-			it.setCustomerCode(item.getInvoice_user().getUserId());
-			it.setAddress(item.getInvoice_user().getAddress());
+			it.setCustomerName(item.getUser().getFullName());
+			it.setCustomerCode(item.getUser().getUserId());
+			it.setAddress(item.getUser().getAddress());
 			
-			List<MetersRespone> metersRespones =new ArrayList<>() ;
+			Set<MetersRespone> metersRespones =new HashSet<>() ;
 			
 			BigDecimal a=new BigDecimal("0");
-			for(WaterMeterReading waterMeterReading :item.getInvoice_waterMeterReading()) {
+			for(WaterMeterReading waterMeterReading :item.getWaterMeterReadings()) {
 				MetersRespone mt =new MetersRespone();
-				mt.setMeterCode(waterMeterReading.getWaterMeterReading_waterMeter().getWaterMeterId());
+				mt.setMeterCode(waterMeterReading.getWaterMeter().getWaterMeterId());
 //				mt.setOldIndex(waterMeterReading.getPreviousReading());
 //				mt.setNewIndex(waterMeterReading.getCurrentReading());
 //				mt.setConsumption(waterMeter  Reading.getWaterUsage());
@@ -66,7 +69,7 @@ public class BillService {
 			it.setMeters(metersRespones);
 			it.setTotalConsumption(a);
 			it.setWaterCost(item.getTotalAmount());
-			it.setDueDate(item.getGracePeriod());
+	//		it.setDueDate(item.getGracePeriod());
 			
 			billResponse.add(it);
 			}

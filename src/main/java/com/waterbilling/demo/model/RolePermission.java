@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 @Table(name = "Role_Permission")
 public class RolePermission {
 

@@ -41,5 +41,55 @@ public class WaterMeter {
     @OneToMany(mappedBy = "waterMeter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	Set<WaterMeterReading> waterMeterReadings =new HashSet<>();
 
+	public Integer getWaterMeterId() {
+		return waterMeterId;
+	}
 
+	public void setWaterMeterId(Integer waterMeterId) {
+		this.waterMeterId = waterMeterId;
+	}
+
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+
+	public Facility getFacility() {
+		return facility;
+	}
+
+	public void setFacility(Facility facility) {
+		this.facility = facility;
+	}
+
+	public LocalDateTime getInstallationDate() {
+		return installationDate;
+	}
+
+	public void setInstallationDate(LocalDateTime installationDate) {
+		this.installationDate = installationDate;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public Set<WaterMeterReading> getWaterMeterReadings() {
+		return waterMeterReadings;
+	}
+
+	public void setWaterMeterReadings(Set<WaterMeterReading> waterMeterReadings) {
+		this.waterMeterReadings = waterMeterReadings;
+	}
+
+
+    
+    
 }

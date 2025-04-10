@@ -45,7 +45,9 @@ public class Facility {
     
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<NotificationFacility> notificationFacilities =new HashSet<>();
-
+    
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    Set<LocationManager> locationManagers =new HashSet<>();
     
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Invoice> invoices =new HashSet<>();
@@ -89,6 +91,15 @@ public class Facility {
 
 	public FacilityType getFacilityType() {
 		return facilityType;
+	}
+
+	
+	public Set<LocationManager> getLocationManagers() {
+		return locationManagers;
+	}
+
+	public void setLocationManagers(Set<LocationManager> locationManagers) {
+		this.locationManagers = locationManagers;
 	}
 
 	public void setFacilityType(FacilityType facilityType) {

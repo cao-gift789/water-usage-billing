@@ -18,15 +18,15 @@ public class AccountService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public Account createAccount(String username, String password) {
-//        Role role = roleRepository.findByRoleName(roleName);
-//        if (role == null) {
-//            throw new RuntimeException("Role không tồn tại");
-//        }
-
-        Account account = new Account(username, password);
-        return accountRepository.save(account);
-    }
+//    public Account createAccount(String username, String password) {
+////        Role role = roleRepository.findByRoleName(roleName);
+////        if (role == null) {
+////            throw new RuntimeException("Role không tồn tại");
+////        }
+//
+//        Account account = Account.builder().username().
+//        return accountRepository.save(account);
+//    }
 
     public Optional<Account> findByUsername(String username) {
         return accountRepository.findByUsername(username);

@@ -1,10 +1,20 @@
 package com.waterbilling.demo.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "PaymentMethod")
 public class PaymentMethod {
@@ -12,58 +22,16 @@ public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PaymentMethodID")
-    private Integer paymentMethodId;
+    Integer paymentMethodId;
 
     @Column(name = "MethodName", length = 50)
-    private String methodName;
+    String methodName;
 
     @Column(name = "Description", columnDefinition = "TEXT")
-    private String description;
+    String description;
     
-    @OneToMany(mappedBy = "transaction_paymentMethod", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Transaction> paymentMethod_transaction=new ArrayList<>();
+    @OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	Set<Transaction> transactions =new HashSet<>();
 
-    // Constructors
-    public PaymentMethod() {
-    }
-
-    public PaymentMethod(String methodName, String description) {
-        this.methodName = methodName;
-        this.description = description;
-    }
-
-    
-	public Integer getPaymentMethodId() {
-		return paymentMethodId;
-	}
-
-	
-	public List<Transaction> getPaymentMethod_transaction() {
-		return paymentMethod_transaction;
-	}
-
-	public void setPaymentMethod_transaction(List<Transaction> paymentMethod_transaction) {
-		this.paymentMethod_transaction = paymentMethod_transaction;
-	}
-
-	public void setPaymentMethodId(Integer paymentMethodId) {
-		this.paymentMethodId = paymentMethodId;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 }

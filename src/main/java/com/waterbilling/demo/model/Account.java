@@ -1,10 +1,20 @@
 package com.waterbilling.demo.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "Account")
 public class Account  {
@@ -25,72 +35,6 @@ public class Account  {
 
     @ManyToOne
     @JoinColumn(name = "RoleID", foreignKey = @ForeignKey(name = "fk_account_role"))
-    private Role account_role;
-    
-    @OneToMany(mappedBy = "employee_account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Employee> account_employees=new ArrayList<>();
+    private Role role;
 
-    // Constructors
-    public Account() {
-    }
-
-    public Account(String username, String password) {
-        this.username = username;
-        this.password = password;
-        
-        this.registrationDate = LocalDateTime.now();
-    }
-
-	public Integer getAccountId() {
-		return accountId;
-	}
-
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
-
-	public Role getAccount_role() {
-		return account_role;
-	}
-
-	public void setAccount_role(Role account_role) {
-		this.account_role = account_role;
-	}
-
-	public List<Employee> getAccount_employees() {
-		return account_employees;
-	}
-
-	public void setAccount_employees(List<Employee> account_employees) {
-		this.account_employees = account_employees;
-	}
-
-    // Getters and Setters
-    
-
-   
 }

@@ -1,10 +1,20 @@
 package com.waterbilling.demo.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "NotificationType")
 public class NotificationType {
@@ -12,59 +22,16 @@ public class NotificationType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NotificationTypeID")
-    private Integer notificationTypeId;
+    Integer notificationTypeId;
 
     @Column(name = "TypeName", length = 100)
-    private String typeName;
+    String typeName;
 
     @Column(name = "Description", columnDefinition = "TEXT")
-    private String description;
+    String description;
     
     @OneToMany(mappedBy = "notificationType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Notification> notifications=new ArrayList<>();
+	Set<Notification> notifications = new HashSet<>();
 
-    // Constructors
-    public NotificationType() {
-    }
-
-    public NotificationType(String typeName, String description) {
-        this.typeName = typeName;
-        this.description = description;
-    }
-
-	public Integer getNotificationTypeId() {
-		return notificationTypeId;
-	}
-
-	public void setNotificationTypeId(Integer notificationTypeId) {
-		this.notificationTypeId = notificationTypeId;
-	}
-
-	public String getTypeName() {
-		return typeName;
-	}
-
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<Notification> getNotifications() {
-		return notifications;
-	}
-
-	public void setNotifications(List<Notification> notifications) {
-		this.notifications = notifications;
-	}
-
-	
-	
 
 }

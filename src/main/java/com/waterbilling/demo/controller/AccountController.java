@@ -1,17 +1,16 @@
 //package com.waterbilling.demo.controller;
 //
+//import com.waterbilling.demo.dto.request.AccountUserRequest;
 //import com.waterbilling.demo.model.Account;
-//import com.waterbilling.demo.model.FacilityType;
 //import com.waterbilling.demo.repository.AccountRepository;
 //import com.waterbilling.demo.service.AccountService;
 //
-//import java.util.List;
-//
+//import jakarta.validation.Valid;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.*;
 //
 //@RestController
-//@RequestMapping("/api/accounts")
+//@RequestMapping("/api/account")
 //public class AccountController {
 //
 //	@Autowired
@@ -19,12 +18,10 @@
 //    @Autowired
 //    private AccountService accountService;
 //
-//    @PostMapping("/create")
-//    public Account createAccount(@RequestParam String username,
-//                                 @RequestParam String password
-//                                 ) {
-//        return accountService.createAccount(username, password);
-//    }
+////    @PostMapping("/create")
+////    public Account createAccount(@RequestBody @Valid AccountUserRequest request) {
+////
+////    }
 //
 //    @DeleteMapping("/{id}")
 //    public void deleteAccount(@PathVariable Integer id ) {

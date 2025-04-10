@@ -1,4 +1,4 @@
-package com.waterbilling.demo.config;
+package com.waterbilling.demo.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

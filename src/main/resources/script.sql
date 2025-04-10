@@ -1,7 +1,68 @@
-- Tạo cơ sở dữ liệu
+
 CREATE DATABASE WaterManagement;
 USE WaterManagement;
 
+-- chức năng đăng ký 
+DELIMITER //
+CREATE PROCEDURE RegisterOrUpdateUserWithAccount(
+    IN p_identity_number VARCHAR(255),
+    IN p_email VARCHAR(255),
+    IN p_phone_number VARCHAR(255),
+    IN p_full_name VARCHAR(255),
+    IN p_password VARCHAR(255),
+    IN p_username VARCHAR(255),
+    OUT p_message VARCHAR(255)
+)
+proc: BEGIN
+    DECLARE user_count INT;
+    DECLARE username_count INT;
+    DECLARE new_account_id INT;
+    DECLARE role_id INT;
+
+    SELECT COUNT(*) INTO username_count FROM account WHERE Username = p_username;
+    IF username_count > 0 THEN
+        SET p_message = 'Username already exists';
+        LEAVE proc;
+    END IF;
+
+    SELECT RoleID INTO role_id 
+    FROM role 
+    WHERE RoleName = 'User' 
+    LIMIT 1;
+
+    IF role_id IS NULL THEN
+        SET p_message = 'Role "User" not found';
+        LEAVE proc;
+    END IF;
+
+    SELECT COUNT(*) INTO user_count 
+    FROM user 
+    WHERE IdentityNumber = p_identity_number;
+
+    IF user_count > 0 THEN
+        IF (SELECT AccountID FROM user WHERE IdentityNumber = p_identity_number) IS NULL THEN
+            INSERT INTO account (Username, Password, RoleID, RegistrationDate)
+            VALUES (p_username, p_password, role_id, CURRENT_TIMESTAMP);
+            SET new_account_id = LAST_INSERT_ID();
+
+            UPDATE user
+            SET AccountID = new_account_id
+            WHERE IdentityNumber = p_identity_number;
+            SET p_message = 'User updated with new account successfully';
+        ELSE
+            SET p_message = 'User already has an account';
+        END IF;
+    ELSE
+        INSERT INTO account (Username, Password, RoleID, RegistrationDate)
+        VALUES (p_username, p_password, role_id, CURRENT_TIMESTAMP);
+        SET new_account_id = LAST_INSERT_ID();
+
+        INSERT INTO user (IdentityNumber, IsActive, Email, PhoneNumber, FullName, AccountID)
+        VALUES (p_identity_number, TRUE, p_email, p_phone_number, p_full_name, new_account_id);
+        SET p_message = 'User and account created successfully';
+    END IF;
+END proc //
+DELIMITER ;
 
 
 -- DELIMITER //
@@ -10,7 +71,7 @@ USE WaterManagement;
 -- BEFORE INSERT ON WaterMeterReading
 -- FOR EACH ROW
 -- BEGIN
---     SET NEW.WaterUsage = NEW.CurrentReading - NEW.PreviousReading;
+--     SET NEW.WaterUsage = NEW.CurrentReadiuserng - NEW.PreviousReading;
 -- END;
 
 -- CREATE TRIGGER trg_CalculateWaterUsage_UPDATE
@@ -82,7 +143,7 @@ INSERT INTO Role (RoleName, Description) VALUES
 ('Employee', 'Nhân viên quản lý và xử lý dữ liệu'),
 ('User', 'Người dùng thông thường');
 
--- Dữ liệu mẫu cho bảng Account
+-- Dữ liệu mẫu cho bảng Accountaccount
 INSERT INTO Account (Username, Password, RegistrationDate, RoleID) VALUES
 ('admin01', 'hashed_password1', '2025-01-01 10:00:00', 1),
 ('employee01', 'hashed_password2', '2025-01-02 09:00:00', 2),

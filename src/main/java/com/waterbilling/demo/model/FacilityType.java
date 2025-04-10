@@ -16,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "facility_type")
+@Table(name = "FacilityType")
 public class FacilityType {
 
     @Id

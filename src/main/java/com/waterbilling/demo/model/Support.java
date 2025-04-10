@@ -15,7 +15,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "support")
+@Entity
+@Table(name = "Support")
 public class Support {
 
     @Id

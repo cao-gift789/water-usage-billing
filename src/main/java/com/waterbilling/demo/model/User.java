@@ -53,9 +53,6 @@ public class User {
     Account account;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    Set<Facility> facilities = new HashSet<>();
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Invoice> invoices = new HashSet<>();
 
 

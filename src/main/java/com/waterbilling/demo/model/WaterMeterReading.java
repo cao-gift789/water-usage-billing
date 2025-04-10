@@ -35,6 +35,7 @@ public class WaterMeterReading {
     BigDecimal currentReading;
 
     @Formula("(CurrentReading - PreviousReading)")
+    @Column(name = "WaterUsage", nullable = false, precision = 10, scale = 2)
 	BigDecimal waterUsage;
 
     @ManyToOne

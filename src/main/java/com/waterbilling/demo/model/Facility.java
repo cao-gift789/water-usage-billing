@@ -31,9 +31,9 @@ public class Facility {
     @Column(name = "RegistrationDate", updatable = false)
     LocalDateTime registrationDate;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "OwnerId", foreignKey = @ForeignKey(name = "fk_facility_user"))
-    User facility_user;
+    User user;
 
     @ManyToOne
     @JoinColumn(name = "FacilityTypeID", foreignKey = @ForeignKey(name = "fk_facility_customertype"))
@@ -46,7 +46,7 @@ public class Facility {
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<NotificationFacility> notificationFacilities =new HashSet<>();
 
-    
+
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Invoice> invoices =new HashSet<>();
 

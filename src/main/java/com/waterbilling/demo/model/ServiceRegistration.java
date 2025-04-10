@@ -10,7 +10,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "serviceregistration ")
+@Entity
+@Table(name = "ServiceRegistration ")
 public class ServiceRegistration {
 
 	@Id

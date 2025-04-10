@@ -14,6 +14,7 @@ import org.hibernate.type.CustomType;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 @Table(name = "PricingTiers")
 public class PricingTiers {
 

@@ -12,6 +12,7 @@ import com.waterbilling.demo.repository.ServiceRegistrationRepository;
 public class ServiceRegistrationService {
 	@Autowired
 	private ServiceRegistrationRepository serviceRegistrationRepository;
+
 	public void saveServiceRegistration(ServiceRegistration serviceRegistration) {
 		serviceRegistrationRepository.save(serviceRegistration);
 	}

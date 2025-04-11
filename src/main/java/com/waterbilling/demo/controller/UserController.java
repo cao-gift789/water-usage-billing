@@ -1,6 +1,9 @@
 package com.waterbilling.demo.controller;
 
 import com.waterbilling.demo.dto.request.UserRegistrionRequest;
+import com.waterbilling.demo.dto.request.UserUpdateRequest;
+import com.waterbilling.demo.dto.response.ApiResponse;
+import com.waterbilling.demo.dto.response.UserResponse;
 import com.waterbilling.demo.model.User;
 import com.waterbilling.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,28 +21,35 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserRegistrionRequest request) {
+    public ApiResponse<?> registerUser(@RequestBody UserRegistrionRequest request) {
+
         String result = userService.registerOrUpdateUser(request);
-        return ResponseEntity.ok(result);
+        return ApiResponse.<String>builder().result(result).build();
     }
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    // api -> check/identityNumber=123456789
+    @GetMapping("/check")
+    public ApiResponse<?> findUserByIdentityNumber(@RequestParam String identityNumber) {
+
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.checkUserByIdentityNumber(identityNumber))
+                .build();
     }
 
-    @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Integer id) {
-        return userService.getUserById(id);
+    @GetMapping("{id}")
+    public ApiResponse<?> findUserById(@PathVariable("id") Integer id) {
+
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.checkUserById(id))
+                .build();
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    @PutMapping("/{id}")
+    public ApiResponse<?> updateUser(@PathVariable Integer id, @RequestBody UserUpdateRequest request) {
+
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.updateUser(id, request))
+                .build();
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id) {
-        userService.deleteUser(id);
-    }
 }

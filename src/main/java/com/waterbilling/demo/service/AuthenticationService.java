@@ -46,8 +46,6 @@ public class AuthenticationService {
 
     AccountRepository accountRepository;
 
-    PasswordEncoder passwordEncoder;
-
     InvalidatedTokenRepository invalidatedTokenRepository;
 
 
@@ -76,6 +74,8 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
         var account = accountRepository
                 .findByUsername(request.getUsername())

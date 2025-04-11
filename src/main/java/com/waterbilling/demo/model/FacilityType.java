@@ -44,4 +44,54 @@ public class FacilityType {
         Fixed, Tiered
     }
 
+	public Integer getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public CalculationMethod getCalculationMethod() {
+		return calculationMethod;
+	}
+
+	public void setCalculationMethod(CalculationMethod calculationMethod) {
+		this.calculationMethod = calculationMethod;
+	}
+
+	public Set<Facility> getFacilities() {
+		return facilities;
+	}
+
+	public void setFacilities(Set<Facility> facilities) {
+		this.facilities = facilities;
+	}
+
+	public Set<PricingTiers> getPricingTiers() {
+		return pricingTiers;
+	}
+
+	public void setPricingTiers(Set<PricingTiers> pricingTiers) {
+		this.pricingTiers = pricingTiers;
+	}
+
+	public FixedPricing getFixedPricing() {
+		return fixedPricing;
+	}
+
+	public void setFixedPricing(FixedPricing fixedPricing) {
+		this.fixedPricing = fixedPricing;
+	}
+
+    
+    
 }

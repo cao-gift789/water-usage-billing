@@ -3,6 +3,7 @@ package com.waterbilling.demo.dto.response;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import com.waterbilling.demo.model.Invoice.InvoiceStatus;
 
@@ -14,7 +15,7 @@ public class BillResponse {
 	private String customerName;
 	private Integer customerCode;
 	private String address;
-	private List<MetersRespone>meters;
+	private Set<MetersRespone>meters;
 	private BigDecimal totalConsumption;
 	private BigDecimal waterCost;
 	private LocalDateTime dueDate;
@@ -66,10 +67,11 @@ public class BillResponse {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public List<MetersRespone> getMeters() {
+	
+	public Set<MetersRespone> getMeters() {
 		return meters;
 	}
-	public void setMeters(List<MetersRespone> meters) {
+	public void setMeters(Set<MetersRespone> meters) {
 		this.meters = meters;
 	}
 	public BigDecimal getTotalConsumption() {

@@ -158,7 +158,7 @@ INSERT INTO User (FullName, IdentityNumber, PhoneNumber, Email, IsActive, Profil
 ('Pham Thi D', '654321987654', '0934567890', 'phamthid@example.com', TRUE, 'profile4.jpg', 4);
 
 -- Dữ liệu mẫu cho bảng FacilityType
-INSERT INTO FacilityType (TypeName, CalculationMethod) VALUES
+INSERT INTO Facility_Type (TypeName, CalculationMethod) VALUES
 ('Residential', 'Tiered'),
 ('Commercial', 'Fixed');
 

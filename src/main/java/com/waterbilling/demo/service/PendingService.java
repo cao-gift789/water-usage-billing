@@ -21,6 +21,7 @@ import com.waterbilling.demo.repository.JoinRequestRepository;
 public class PendingService {
 	@Autowired
 	private JoinRequestRepository joinRequestRepository;
+
 	public List< PendingResponse> findPending(JoinStatusRequest joinStatusRequest) {
 		
 		List< PendingResponse>houseHoldResponse=new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.waterbilling.demo.dto.request;
 
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -8,8 +9,10 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthenticationRequest {
+public class ChangePasswordRequest {
 
-    String username;
-    String password;
+    String currentPassword;
+    String newPassword;
+
+
 }

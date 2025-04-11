@@ -8,8 +8,12 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthenticationRequest {
+public class ChangePasswordOtpRequest {
 
-    String username;
-    String password;
+    String email;
+
+    String otpCode;
+
+    String newPassword;
+
 }

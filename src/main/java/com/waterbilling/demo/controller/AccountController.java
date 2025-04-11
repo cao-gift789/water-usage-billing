@@ -27,16 +27,6 @@ public class AccountController {
 //        return accountService.createAccount(username, password);
 //    }
     
-    @DeleteMapping("/{id}")
-    public void deleteAccount(@PathVariable Integer id ) {
-    	Account acount=accountRepository.getById(id);
-    	accountRepository.delete(acount);	
-    }
-    @PostMapping("/find")
-    public boolean findAccount(@RequestParam String username, 
-    								   @RequestParam String password ) {
-    	
-    	return accountService.findAccount(username, password);
-    }
+
 }
 

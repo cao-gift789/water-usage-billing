@@ -1,16 +1,9 @@
 package com.waterbilling.demo.service;
 
-import com.waterbilling.demo.dto.request.AccountUserRequest;
-import com.waterbilling.demo.model.Account;
-import com.waterbilling.demo.model.Role;
 import com.waterbilling.demo.repository.AccountRepository;
-import com.waterbilling.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -18,46 +11,28 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-//    public boolean createAccount(AccountUserRequest request) {
+//    public void changePassword(ChangePasswordRequest request) {
+//        // Lấy email từ context (người dùng đã đăng nhập)
+//        String email = SecurityContextHolder.getContext().getAuthentication().getName();
 //
-//        if (accountRepository.existsByUsername(request.getUsername())) {
-//            throw new RuntimeException("Username đã tồn tại");
+//        // Tìm account
+//        Account account = accountRepository.findByEmail(email);
+//        if (account == null) {
+//            throw new ApplicationException(ErrorCode.USER_NOT_FOUND);
 //        }
 //
-//        Role role = roleRepository.findByName("USER")
-//                .orElseThrow(() -> new RuntimeException("Role USER không tồn tại"));
-//
-//        Account account = Account.builder()
-//                .username(request.getUsername())
-//                .password(passwordEncoder.encode(request.getPassword())) // nhớ mã hóa mật khẩu
-//                .role(role)
-//                .build();
-//
-//        try {
-//            accountRepository.save(account);
-//            return true;
-//        }catch(DataIntegrityViolationException exception) {
-//
+//        // Kiểm tra mật khẩu hiện tại
+//        if (!passwordEncoder.matches(request.getCurrentPassword(), account.getPassword())) {
+//            throw new ApplicationException(ErrorCode.INVALID_PASSWORD);
 //        }
 //
-//        return
+//        // Cập nhật mật khẩu mới
+//        account.setPassword(passwordEncoder.encode(request.getNewPassword()));
+//        accountRepository.save(account);
 //    }
 
-    public Optional<Account> findByUsername(String username) {
-        return accountRepository.findByUsername(username);
-    }
-    public boolean findAccount(String username, String password) {
-    	if(accountRepository.findByUsernameAndPassword(username,password) != null){
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
-    }
 }

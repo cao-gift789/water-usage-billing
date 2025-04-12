@@ -8,6 +8,8 @@ import com.waterbilling.demo.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/news")
 public class NewsController {
@@ -15,6 +17,12 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
+    @GetMapping
+    private ApiResponse<?> allNews() {
+        return ApiResponse.<List<NewsResponse>>builder()
+                .result(newsService.findAllNews())
+                .build();
+    }
     @GetMapping("/{id}")
     private ApiResponse<?> newsDetail(@PathVariable("id") Integer id) {
         return ApiResponse.<NewsResponse>builder()

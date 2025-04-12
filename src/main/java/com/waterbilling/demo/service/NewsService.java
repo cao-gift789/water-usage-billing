@@ -3,6 +3,7 @@ package com.waterbilling.demo.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.waterbilling.demo.dto.request.NewsRequest;
 import com.waterbilling.demo.dto.response.NewsResponse;
@@ -31,9 +32,20 @@ public class NewsService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public List<News> findNews () {
-		 List<News> resualList = newsRepository.findAll();
-		 return resualList;
+	public List<NewsResponse> findAllNews () {
+		List<News> resultList = newsRepository.findAll();
+
+		List<NewsResponse> listNewsResponse = resultList.stream()
+				.map(news -> NewsResponse.builder()
+						.id(news.getNewsId())
+						.content(news.getContent())
+						.title(news.getTitle())
+						.createdDate(news.getCreatedDate())
+						.nameEmployee(news.getEmployee().getFullName())
+						.build())
+				.collect(Collectors.toList());
+
+		return listNewsResponse;
 	}
 
 	public NewsResponse findNewsById(Integer id) {

@@ -64,8 +64,5 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
     
-    public List<User> getActiveUsers() {
-        return userRepository.findAllActiveUsers();
-    }
 
 }

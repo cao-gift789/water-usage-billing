@@ -45,61 +45,61 @@ public class Notification {
     @OneToMany(mappedBy = "notification", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	Set<NotificationFacility> notificationFacilities = new HashSet<>();
 
-	public Integer getNotificationId() {
-		return notificationId;
-	}
-
-	public void setNotificationId(Integer notificationId) {
-		this.notificationId = notificationId;
-	}
-
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public NotificationType getNotificationType() {
-		return notificationType;
-	}
-
-	public void setNotificationType(NotificationType notificationType) {
-		this.notificationType = notificationType;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public Set<NotificationFacility> getNotificationFacilities() {
-		return notificationFacilities;
-	}
-
-	public void setNotificationFacilities(Set<NotificationFacility> notificationFacilities) {
-		this.notificationFacilities = notificationFacilities;
-	}
+//	public Integer getNotificationId() {
+//		return notificationId;
+//	}
+//
+//	public void setNotificationId(Integer notificationId) {
+//		this.notificationId = notificationId;
+//	}
+//
+//	public LocalDateTime getCreatedDate() {
+//		return createdDate;
+//	}
+//
+//	public void setCreatedDate(LocalDateTime createdDate) {
+//		this.createdDate = createdDate;
+//	}
+//
+//	public String getTitle() {
+//		return title;
+//	}
+//
+//	public void setTitle(String title) {
+//		this.title = title;
+//	}
+//
+//	public String getContent() {
+//		return content;
+//	}
+//
+//	public void setContent(String content) {
+//		this.content = content;
+//	}
+//
+//	public NotificationType getNotificationType() {
+//		return notificationType;
+//	}
+//
+//	public void setNotificationType(NotificationType notificationType) {
+//		this.notificationType = notificationType;
+//	}
+//
+//	public Employee getEmployee() {
+//		return employee;
+//	}
+//
+//	public void setEmployee(Employee employee) {
+//		this.employee = employee;
+//	}
+//
+//	public Set<NotificationFacility> getNotificationFacilities() {
+//		return notificationFacilities;
+//	}
+//
+//	public void setNotificationFacilities(Set<NotificationFacility> notificationFacilities) {
+//		this.notificationFacilities = notificationFacilities;
+//	}
 
     
     

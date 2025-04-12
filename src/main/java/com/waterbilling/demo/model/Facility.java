@@ -33,9 +33,8 @@ public class Facility {
     @Column(name = "RegistrationDate", updatable = false)
     LocalDateTime registrationDate;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "OwnerId", foreignKey = @ForeignKey(name = "fk_facility_user"))
-    @JsonBackReference(value = "user-facility") // Bên ngược lại
     User user;
 
 
@@ -56,96 +55,94 @@ public class Facility {
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Invoice> invoices =new HashSet<>();
 
-
-    
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<JoinRequest> joinRequests = new HashSet<>();
 
     @Column(name = "IsActive")
     Boolean isActive = true;
 
-	public Integer getFacilityId() {
-		return facilityId;
-	}
-
-	public void setFacilityId(Integer facilityId) {
-		this.facilityId = facilityId;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
-
-	
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public FacilityType getFacilityType() {
-		return facilityType;
-	}
-
-	
-	public Set<LocationManager> getLocationManagers() {
-		return locationManagers;
-	}
-
-	public void setLocationManagers(Set<LocationManager> locationManagers) {
-		this.locationManagers = locationManagers;
-	}
-
-	public void setFacilityType(FacilityType facilityType) {
-		this.facilityType = facilityType;
-	}
-
-	public Set<WaterMeter> getWaterMeters() {
-		return waterMeters;
-	}
-
-	public void setWaterMeters(Set<WaterMeter> waterMeters) {
-		this.waterMeters = waterMeters;
-	}
-
-	public Set<NotificationFacility> getNotificationFacilities() {
-		return notificationFacilities;
-	}
-
-	public void setNotificationFacilities(Set<NotificationFacility> notificationFacilities) {
-		this.notificationFacilities = notificationFacilities;
-	}
-
-	public Set<Invoice> getInvoices() {
-		return invoices;
-	}
-
-	public void setInvoices(Set<Invoice> invoices) {
-		this.invoices = invoices;
-	}
-
-	public Boolean getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
+//	public Integer getFacilityId() {
+//		return facilityId;
+//	}
+//
+//	public void setFacilityId(Integer facilityId) {
+//		this.facilityId = facilityId;
+//	}
+//
+//	public String getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddress(String address) {
+//		this.address = address;
+//	}
+//
+//	public LocalDateTime getRegistrationDate() {
+//		return registrationDate;
+//	}
+//
+//	public void setRegistrationDate(LocalDateTime registrationDate) {
+//		this.registrationDate = registrationDate;
+//	}
+//
+//
+//
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
+//	public FacilityType getFacilityType() {
+//		return facilityType;
+//	}
+//
+//
+//	public Set<LocationManager> getLocationManagers() {
+//		return locationManagers;
+//	}
+//
+//	public void setLocationManagers(Set<LocationManager> locationManagers) {
+//		this.locationManagers = locationManagers;
+//	}
+//
+//	public void setFacilityType(FacilityType facilityType) {
+//		this.facilityType = facilityType;
+//	}
+//
+//	public Set<WaterMeter> getWaterMeters() {
+//		return waterMeters;
+//	}
+//
+//	public void setWaterMeters(Set<WaterMeter> waterMeters) {
+//		this.waterMeters = waterMeters;
+//	}
+//
+//	public Set<NotificationFacility> getNotificationFacilities() {
+//		return notificationFacilities;
+//	}
+//
+//	public void setNotificationFacilities(Set<NotificationFacility> notificationFacilities) {
+//		this.notificationFacilities = notificationFacilities;
+//	}
+//
+//	public Set<Invoice> getInvoices() {
+//		return invoices;
+//	}
+//
+//	public void setInvoices(Set<Invoice> invoices) {
+//		this.invoices = invoices;
+//	}
+//
+//	public Boolean getIsActive() {
+//		return isActive;
+//	}
+//
+//	public void setIsActive(Boolean isActive) {
+//		this.isActive = isActive;
+//	}
     
     
     

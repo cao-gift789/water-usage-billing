@@ -64,11 +64,7 @@ public class HomeController {
 		supportService.saveSupport(modelMapper.map(request, Support.class));
 	}
 	
-	@GetMapping(value="/tin-tuc")
-	@ResponseBody
-	public List<Object[]> news() {
-	    return newsService.getAllNews();
-	}
+
 
 	@GetMapping(value="/tra-cuu")
 	public List<BillResponse> lookup(@Valid @RequestBody Integer FacilityID) {

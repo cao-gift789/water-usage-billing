@@ -2,6 +2,8 @@ package com.waterbilling.demo.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -48,12 +50,12 @@ public class BillService {
 			it.setStatus(item.getStatus());
 			it.setCustomerName(item.getUser().getFullName());
 			it.setCustomerCode(item.getUser().getUserId());
-			it.setAddress(facility.getAddress());
+			it.setAddress(item.getUser().getAddress());
 			
-			List<MetersRespone> metersRespones =new ArrayList<>() ;
+			Set<MetersRespone> metersRespones =new HashSet<>() ;
 			
 			BigDecimal a=new BigDecimal("0");
-			for(WaterMeterReading waterMeterReading : item.getWaterMeterReadings()) {
+			for(WaterMeterReading waterMeterReading :item.getWaterMeterReadings()) {
 				MetersRespone mt =new MetersRespone();
 				mt.setMeterCode(waterMeterReading.getWaterMeter().getWaterMeterId());
 //				mt.setOldIndex(waterMeterReading.getPreviousReading());
@@ -67,6 +69,8 @@ public class BillService {
 			it.setMeters(metersRespones);
 			it.setTotalConsumption(a);
 			it.setWaterCost(item.getTotalAmount());
+	//		it.setDueDate(item.getGracePeriod());
+			
 			billResponse.add(it);
 			}
 			

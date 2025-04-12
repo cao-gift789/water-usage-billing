@@ -97,7 +97,7 @@ INSERT INTO User (FullName, IdentityNumber, PhoneNumber, Email, IsActive, Profil
 ('Pham Thi D', '654321987654', '0934567890', 'phamthid@example.com', TRUE, 'profile4.jpg', 4);
 
 -- Dữ liệu mẫu cho bảng FacilityType
-INSERT INTO FacilityType (TypeName, CalculationMethod) VALUES
+INSERT INTO Facility_Type (TypeName, CalculationMethod) VALUES
 ('Residential', 'Tiered'),
 ('Commercial', 'Fixed');
 
@@ -184,4 +184,123 @@ INSERT INTO News (Title, Content, CreatedDate, CreatedBy, Status) VALUES
 INSERT INTO JoinRequest (UserID, FacilityID, RequestDate, Note) VALUES
 (4, 1, '2025-03-03 14:00:00', 'Yêu cầu tham gia cơ sở 123 Đường Láng');
 
+-- Procedure truc
+-- Quản lý hộ gia đình ( Xem, Thêm hộ gia đình, dừng hoạt động hộ gia đình).
 
+--Xem
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_get_all_facilities()
+--BEGIN
+--    SELECT 
+--        f.FacilityID,
+--        f.Address,
+--        f.RegistrationDate,
+--        f.IsActive,
+--        u.FullName AS OwnerName,
+--        u.UserID AS OwnerID
+--    FROM facility f
+--    JOIN user u ON f.OwnerId = u.UserID;
+--END $$
+--
+--DELIMITER ;
+
+
+--Thêm hộ gia đình
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_add_facility(
+--    IN p_address VARCHAR(255),
+--    IN p_registrationDate DATETIME(6),
+--    IN p_ownerId INT,
+--    IN p_facilityTypeId INT
+--)
+--BEGIN
+--    INSERT INTO facility (Address, RegistrationDate, OwnerId, FacilityTypeID, IsActive)
+--    VALUES (p_address, p_registrationDate, p_ownerId, p_facilityTypeId, 1);
+--END $$
+--
+--DELIMITER ;
+
+
+--dừng hoạt động hộ gia đình
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_deactivate_facility(
+--    IN p_facilityId INT
+--)
+--BEGIN
+--    UPDATE facility
+--    SET IsActive = 0
+--    WHERE FacilityID = p_facilityId;
+--END $$
+--
+--DELIMITER ;
+
+
+--Quản lý tin tức (Xem, xóa, sửa, thêm):
+
+--Xem
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_get_all_news()
+--BEGIN
+--    SELECT NewsID, Title, Content, CreatedDate, CreatedBy
+--    FROM news
+--    WHERE Status = 1;
+--END $$
+--
+--DELIMITER ;
+
+
+
+--Thêm 
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_add_news(
+--    IN p_title VARCHAR(100),
+--    IN p_content TEXT,
+--    IN p_createdBy INT
+--)
+--BEGIN
+--    INSERT INTO news (Title, Content, CreatedDate, CreatedBy, Status)
+--    VALUES (p_title, p_content, NOW(), p_createdBy, 1);
+--END $$
+--
+--DELIMITER ;
+
+
+
+--Suẳ
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_update_news(
+--    IN p_newsId INT,
+--    IN p_title VARCHAR(100),
+--    IN p_content TEXT
+--)
+--BEGIN
+--    UPDATE news
+--    SET Title = p_title,
+--        Content = p_content
+--    WHERE NewsID = p_newsId AND Status = 1;
+--END $$
+--
+--DELIMITER ;
+
+
+
+--xóa
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_delete_news(IN p_newsId INT)
+--BEGIN
+--    UPDATE news
+--    SET Status = 0
+--    WHERE NewsID = p_newsId;
+--END $$
+--
+--DELIMITER ;
+
+
+-- Nhân viên đang làm, tối sẽ cập nhật sớm cho ae

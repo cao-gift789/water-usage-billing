@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @Builder
@@ -30,7 +32,9 @@ public class WaterMeter {
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_watermeter_facility"))
+    @JsonIgnore 
     Facility facility;
+
 
     @Column(name = "InstallationDate")
     LocalDateTime installationDate = LocalDateTime.now();
@@ -41,5 +45,55 @@ public class WaterMeter {
     @OneToMany(mappedBy = "waterMeter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	Set<WaterMeterReading> waterMeterReadings =new HashSet<>();
 
+	public Integer getWaterMeterId() {
+		return waterMeterId;
+	}
 
+	public void setWaterMeterId(Integer waterMeterId) {
+		this.waterMeterId = waterMeterId;
+	}
+
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+
+	public Facility getFacility() {
+		return facility;
+	}
+
+	public void setFacility(Facility facility) {
+		this.facility = facility;
+	}
+
+	public LocalDateTime getInstallationDate() {
+		return installationDate;
+	}
+
+	public void setInstallationDate(LocalDateTime installationDate) {
+		this.installationDate = installationDate;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public Set<WaterMeterReading> getWaterMeterReadings() {
+		return waterMeterReadings;
+	}
+
+	public void setWaterMeterReadings(Set<WaterMeterReading> waterMeterReadings) {
+		this.waterMeterReadings = waterMeterReadings;
+	}
+
+
+    
+    
 }

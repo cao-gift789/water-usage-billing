@@ -24,8 +24,6 @@ public class AccountService {
 
     public void changePassword(ChangePasswordRequest request) {
 
-        log.info("SecurityContextHolder.getContext() : " + SecurityContextHolder.getContext());
-        log.info("SecurityContextHolder.getContext().getAuthentication() : " + SecurityContextHolder.getContext().getAuthentication());
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Account account = accountRepository.findByUsername(username)

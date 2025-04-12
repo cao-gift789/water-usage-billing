@@ -14,7 +14,8 @@ public enum ErrorCode {
     UNAUTHENTICATED(1006, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1007, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_OTP(1009, "Your otp code is not correct !", HttpStatus.BAD_REQUEST),
-    OTP_EXPIRED(1010, "Your otp is expired", HttpStatus.BAD_REQUEST )
+    OTP_EXPIRED(1010, "Your otp is expired", HttpStatus.BAD_REQUEST ),
+    NEWS_NOT_EXISTED(1011, "News not existed", HttpStatus.BAD_REQUEST)
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

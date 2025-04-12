@@ -40,7 +40,7 @@ public class FacilityType {
     @OneToOne(mappedBy = "facilityType", cascade = CascadeType.ALL)
     FixedPricing fixedPricing;
 
-    enum CalculationMethod {
+    public enum CalculationMethod {
         Fixed, Tiered
     }
 

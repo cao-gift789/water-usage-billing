@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Getter
 @Setter
 @Builder
@@ -31,17 +33,19 @@ public class Facility {
     @Column(name = "RegistrationDate", updatable = false)
     LocalDateTime registrationDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "OwnerId", foreignKey = @ForeignKey(name = "fk_facility_user"))
+    @JsonBackReference(value = "user-facility") // Bên ngược lại
     User user;
+
 
     @ManyToOne
     @JoinColumn(name = "FacilityTypeID", foreignKey = @ForeignKey(name = "fk_facility_customertype"))
     FacilityType facilityType;
     
 
-    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    Set<WaterMeter> waterMeters =new HashSet<>();
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<WaterMeter> waterMeters = new HashSet<>();
     
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<NotificationFacility> notificationFacilities =new HashSet<>();
@@ -51,6 +55,11 @@ public class Facility {
     
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Invoice> invoices =new HashSet<>();
+
+
+    
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<JoinRequest> joinRequests = new HashSet<>();
 
     @Column(name = "IsActive")
     Boolean isActive = true;

@@ -34,13 +34,11 @@ import com.waterbilling.demo.service.SupportService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller()
 public class HomeController {
-
 
 	@Autowired
 	private SupportService supportService;
@@ -52,14 +50,6 @@ public class HomeController {
 	private ServiceRegistrationService serviceRegistrationService;
     @Autowired
     private ModelMapper modelMapper;
-    
-
-
-
-
-	
-
-
 
 	@GetMapping(value="/trang-chu")
 	public void home() {
@@ -75,9 +65,11 @@ public class HomeController {
 	}
 	
 	@GetMapping(value="/tin-tuc")
-	public List<News>news() {
-		return newsService.findNews();
+	@ResponseBody
+	public List<Object[]> news() {
+	    return newsService.getAllNews();
 	}
+
 	@GetMapping(value="/tra-cuu")
 	public List<BillResponse> lookup(@Valid @RequestBody Integer FacilityID) {
 		return billService.findBillResponses(FacilityID);
@@ -99,7 +91,6 @@ public class HomeController {
 //			new SecurityContextLogoutHandler().logout(request, response, auth);
 //		}
 //		return new ModelAndView("redirect:/trang-chu");
-
 //	}
 //	@GetMapping(value="/bang-gia")
 //	public void priceList() {

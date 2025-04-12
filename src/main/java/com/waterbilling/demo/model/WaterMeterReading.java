@@ -3,12 +3,11 @@ package com.waterbilling.demo.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Formula;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Getter
 @Setter
@@ -36,85 +35,83 @@ public class WaterMeterReading {
 
     @Formula("(CurrentReading - PreviousReading)")
     @Column(name = "WaterUsage", nullable = false, precision = 10, scale = 2)
-	BigDecimal waterUsage;
+    BigDecimal waterUsage;
 
     @ManyToOne
     @JoinColumn(name = "RecordedBy", foreignKey = @ForeignKey(name = "fk_watermeterreading_employee"))
     Employee employee;
-    
+
     @ManyToOne
     @JoinColumn(name = "InvoiceID", foreignKey = @ForeignKey(name = "fk_waterMeterReading_invoice"))
-	Invoice invoice;
+    Invoice invoice;
 
-	@ManyToOne
-	@JoinColumn(name = "WaterMeterID", foreignKey = @ForeignKey(name = "fk_watermeterreading_watermeter"))
-	WaterMeter waterMeter;
+    @ManyToOne
+    @JoinColumn(name = "WaterMeterID", foreignKey = @ForeignKey(name = "fk_watermeterreading_watermeter"))
+    @JsonIgnore // CHẶN VÒNG LẶP NẰM Ở ĐÂY
+    WaterMeter waterMeter;
 
-	public Integer getReadingId() {
-		return readingId;
-	}
+    // --- Getters and Setters ---
+    public Integer getReadingId() {
+        return readingId;
+    }
 
-	public void setReadingId(Integer readingId) {
-		this.readingId = readingId;
-	}
+    public void setReadingId(Integer readingId) {
+        this.readingId = readingId;
+    }
 
-	public LocalDateTime getDateRecorded() {
-		return dateRecorded;
-	}
+    public LocalDateTime getDateRecorded() {
+        return dateRecorded;
+    }
 
-	public void setDateRecorded(LocalDateTime dateRecorded) {
-		this.dateRecorded = dateRecorded;
-	}
+    public void setDateRecorded(LocalDateTime dateRecorded) {
+        this.dateRecorded = dateRecorded;
+    }
 
-	public BigDecimal getPreviousReading() {
-		return previousReading;
-	}
+    public BigDecimal getPreviousReading() {
+        return previousReading;
+    }
 
-	public void setPreviousReading(BigDecimal previousReading) {
-		this.previousReading = previousReading;
-	}
+    public void setPreviousReading(BigDecimal previousReading) {
+        this.previousReading = previousReading;
+    }
 
-	public BigDecimal getCurrentReading() {
-		return currentReading;
-	}
+    public BigDecimal getCurrentReading() {
+        return currentReading;
+    }
 
-	public void setCurrentReading(BigDecimal currentReading) {
-		this.currentReading = currentReading;
-	}
+    public void setCurrentReading(BigDecimal currentReading) {
+        this.currentReading = currentReading;
+    }
 
-	public BigDecimal getWaterUsage() {
-		return waterUsage;
-	}
+    public BigDecimal getWaterUsage() {
+        return waterUsage;
+    }
 
-	public void setWaterUsage(BigDecimal waterUsage) {
-		this.waterUsage = waterUsage;
-	}
+    public void setWaterUsage(BigDecimal waterUsage) {
+        this.waterUsage = waterUsage;
+    }
 
-	public Employee getEmployee() {
-		return employee;
-	}
+    public Employee getEmployee() {
+        return employee;
+    }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
-	public Invoice getInvoice() {
-		return invoice;
-	}
+    public Invoice getInvoice() {
+        return invoice;
+    }
 
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
-	}
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
 
-	public WaterMeter getWaterMeter() {
-		return waterMeter;
-	}
+    public WaterMeter getWaterMeter() {
+        return waterMeter;
+    }
 
-	public void setWaterMeter(WaterMeter waterMeter) {
-		this.waterMeter = waterMeter;
-	}
-
-	
-	
-	
+    public void setWaterMeter(WaterMeter waterMeter) {
+        this.waterMeter = waterMeter;
+    }
 }

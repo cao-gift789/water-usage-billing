@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @Builder
@@ -30,7 +32,9 @@ public class WaterMeter {
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_watermeter_facility"))
+    @JsonIgnore 
     Facility facility;
+
 
     @Column(name = "InstallationDate")
     LocalDateTime installationDate = LocalDateTime.now();

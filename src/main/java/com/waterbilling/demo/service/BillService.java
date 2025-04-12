@@ -50,7 +50,6 @@ public class BillService {
 			it.setStatus(item.getStatus());
 			it.setCustomerName(item.getUser().getFullName());
 			it.setCustomerCode(item.getUser().getUserId());
-
 			
 			Set<MetersRespone> metersRespones =new HashSet<>() ;
 			

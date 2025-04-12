@@ -24,8 +24,13 @@ import java.util.Arrays;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {
-            "/users", "/api/auth/token", "/api/auth/introspect", "/api/auth/logout", "/api/auth/refresh"
+
+    private final String[] PUBLIC_POST_ENDPOINTS = {
+            "/api/users/register", "/api/auth/token", "/api/auth/introspect", "/api/auth/logout", "/api/auth/refresh"
+    };
+    private final String[] PUBLIC_GET_ENDPOINTS = {
+            "/api/users/check",
+
     };
 
     @Autowired
@@ -33,11 +38,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(request ->
-                    request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
-                .permitAll()
-                .anyRequest()
-                .authenticated());
+        httpSecurity
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                // Tắt CSRF (thường dùng cho API)
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(request -> request
+                            .requestMatchers(HttpMethod.POST, PUBLIC_POST_ENDPOINTS).permitAll()
+                            .requestMatchers(HttpMethod.GET, PUBLIC_GET_ENDPOINTS).permitAll()
+                        .anyRequest()
+                        .authenticated());
 
         httpSecurity.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer
                         .decoder(customJwtDecoder)

@@ -36,7 +36,7 @@ public class UserController {
                 .build();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ApiResponse<?> findUserById(@PathVariable("id") Integer id) {
 
         return ApiResponse.<UserResponse>builder()

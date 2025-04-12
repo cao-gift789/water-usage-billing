@@ -4,10 +4,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.waterbilling.demo.dto.response.MemberInformationResponese;
+import com.waterbilling.demo.model.Facility;
+import com.waterbilling.demo.model.WaterMeter;
+import com.waterbilling.demo.repository.FacilityRepository;
+
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FacilityService {
@@ -46,4 +55,30 @@ public class FacilityService {
         query.setParameter("p_facilityId", facilityId);
         query.execute();
     }
+    @Autowired
+    private FacilityRepository facilityRepository;
+    public MemberInformationResponese findInformation(Integer id) {
+		MemberInformationResponese infor =new MemberInformationResponese();
+		
+		Facility facility= facilityRepository.getById(id);
+		
+		infor.setName(facility.getUser().getFullName());
+		infor.setFacilityCode(facility.getFacilityId());
+		infor.setEmail(facility.getAddress());
+		infor.setPhoneNumber(facility.getUser().getPhoneNumber());
+		infor.setEmail(facility.getUser().getEmail());
+		
+		Set<Integer>a=new HashSet<>();
+		Set<WaterMeter>waterMeters=facility.getWaterMeters();
+		for(WaterMeter w: waterMeters) {
+			a.add(w.getWaterMeterId());
+		}
+		infor.setWaterMeterID(a);
+		infor.setMember(facility.getLocationManagers().size());
+		
+		
+		return infor;
+		
+	}
+    
 }

@@ -1,4 +1,4 @@
-package com.waterbilling.demo.service;
+	package com.waterbilling.demo.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,9 +18,43 @@ import com.waterbilling.demo.model.WaterMeter;
 import com.waterbilling.demo.repository.JoinRequestRepository;
 
 @Service
-public class PendingService {
+public class JoinRequestService {
+
+	
 	@Autowired
 	private JoinRequestRepository joinRequestRepository;
+	
+	
+	public List< HouseHoldResponse> findHouseHold(JoinStatusRequest joinStatusRequest) {
+		
+		List< HouseHoldResponse>houseHoldResponse=new ArrayList<>();
+		
+		List<JoinRequest> joinRequests= joinRequestRepository.findByStatus(joinStatusRequest.getJoinStatus());
+		for(JoinRequest jr:joinRequests) {
+			HouseHoldResponse house =new HouseHoldResponse();
+			
+			User user =jr.getUser();
+			Facility facility =jr.getFacility();
+			house.setName(user.getFullName());
+			house.setFacilityCode(facility.getFacilityId());
+			house.setAddress(facility.getAddress());
+			house.setMember(facility.getLocationManagers().size());
+			
+			Set<Integer>a=new HashSet<>();
+			for(WaterMeter w:facility.getWaterMeters()) {
+				a.add(w.getWaterMeterId());
+			}
+			
+			house.setWaterMeterID(a);
+			house.setTypeName(facility.getFacilityType().getTypeName());
+			
+			
+			houseHoldResponse.add(house);
+		}
+		
+		return houseHoldResponse;
+		}
+	
 
 	public List< PendingResponse> findPending(JoinStatusRequest joinStatusRequest) {
 		
@@ -45,4 +79,5 @@ public class PendingService {
 		
 		return houseHoldResponse;
 	}
+	
 }

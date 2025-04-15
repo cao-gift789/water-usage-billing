@@ -5,7 +5,12 @@ import com.waterbilling.demo.dto.request.NewsRequest;
 import com.waterbilling.demo.dto.response.ApiResponse;
 import com.waterbilling.demo.dto.response.NewsResponse;
 import com.waterbilling.demo.service.NewsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +22,14 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @GetMapping
-    private ApiResponse<?> allNews() {
-        return ApiResponse.<List<NewsResponse>>builder()
-                .result(newsService.findAllNews())
-                .build();
-    }
+//    @GetMapping
+//    public ResponseEntity<Page<NewsResponse>> getAllNews(
+//            @RequestParam(required = false) String search,
+//            @RequestParam(required = false) Boolean status,
+//            @RequestParam(required = false) Integer createdById,
+//            @PageableDefault(size = 10, sort = "newsId") Pageable pageable) {
+//        return ResponseEntity.ok(newsService.getAllNews(search, status, createdById, pageable));
+//    }
     @GetMapping("/{id}")
     private ApiResponse<?> newsDetail(@PathVariable("id") Integer id) {
         return ApiResponse.<NewsResponse>builder()
@@ -31,14 +38,14 @@ public class NewsController {
     }
 
     @PostMapping
-    private ApiResponse<?> create(@RequestBody NewsRequest request) {
+    private ApiResponse<?> create(@Valid @RequestBody NewsRequest request) {
         return ApiResponse.<NewsResponse>builder()
                 .result(newsService.createNews(request))
                 .build();
     }
 
     @PutMapping("/{id}")
-    private ApiResponse<?> update(@RequestBody NewsRequest request, @PathVariable("id") Integer id) {
+    private ApiResponse<?> update(@Valid @RequestBody NewsRequest request, @PathVariable("id") Integer id) {
         return ApiResponse.<NewsResponse>builder()
                 .result(newsService.updateNews(request, id))
                 .build();

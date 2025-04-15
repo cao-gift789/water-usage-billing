@@ -26,7 +26,6 @@ public class PermissionService {
         Permission permission = permissionMapper.toPermission(request);
         permission = permissionRepository.save(permission);
         return permissionMapper.toPermissionResponse(permission);
-
     }
 
     public List<PermissionResponse> getAll() {

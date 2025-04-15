@@ -24,13 +24,6 @@ public class NotificationFacility {
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_notification_facility_facility"))
     Facility facility;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Status", nullable = false)
-    NotificationStatus status;
-
-    public enum NotificationStatus {
-        Read, Unread
-    }
 //
 //	public Notification getNotification() {
 //		return notification;

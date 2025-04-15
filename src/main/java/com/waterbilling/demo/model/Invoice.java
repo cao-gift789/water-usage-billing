@@ -42,10 +42,6 @@ public class Invoice {
     @JoinColumn(name = "CreatedBy", foreignKey = @ForeignKey(name = "fk_invoice_employee"))
     Employee employee;
 
-    @ManyToOne
-    @JoinColumn(name = "PaidBy", foreignKey = @ForeignKey(name = "fk_invoice_user"))
-    User user;
-
 
     @ManyToOne
     @JoinColumn(name = "FacilityID", foreignKey = @ForeignKey(name = "fk_invoice_facility"))

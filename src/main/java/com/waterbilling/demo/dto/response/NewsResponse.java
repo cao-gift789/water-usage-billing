@@ -15,10 +15,11 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class NewsResponse {
 
-    Integer id;
-    String title;
-    String content;
-    LocalDateTime createdDate;
-    String nameEmployee;
+    private Integer newsId;
+    private String title;
+    private String content;
+    private LocalDateTime createdDate;
+    private Integer createdById;
+    private Boolean status;
 
 }

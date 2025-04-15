@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PricingTierResponse {
 
-    Long tierId;
+    Integer tierId;
     BigDecimal minUsage;
     BigDecimal maxUsage;
     BigDecimal pricePerM3;

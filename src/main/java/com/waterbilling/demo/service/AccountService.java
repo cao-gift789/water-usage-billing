@@ -24,9 +24,9 @@ public class AccountService {
 
     public void changePassword(ChangePasswordRequest request) {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        Account account = accountRepository.findByUsername(username)
+        Account account = accountRepository.findById( Integer.parseInt(accountId))
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         if (!passwordEncoder.matches(request.getCurrentPassword(), account.getPassword())) {

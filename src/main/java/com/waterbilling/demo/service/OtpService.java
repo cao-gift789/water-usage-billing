@@ -58,7 +58,7 @@ public class OtpService {
     }
 
     public void changePasswordWithOtp(ChangePasswordOtpRequest request) {
-        Otp otp = otpRepository.findByEmailAndOtpCode(request.getEmail(), request.getOtpCode())
+        Otp otp = otpRepository.findByEmailAndOtpCode(request.getEmail(), request.getOtp())
                 .orElseThrow(() -> new AppException(ErrorCode.INVALID_OTP));
 
         if (otp.getExpiresAt().isBefore(LocalDateTime.now()))
@@ -67,7 +67,8 @@ public class OtpService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        Account account = user.getAccount();
+        Account account = accountRepository.findById(user.getAccountId())
+                .orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
         account.setPassword(passwordEncoder.encode(request.getNewPassword()));
         accountRepository.save(account);
 

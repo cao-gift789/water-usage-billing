@@ -15,7 +15,15 @@ public enum ErrorCode {
     UNAUTHORIZED(1007, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_OTP(1009, "Your otp code is not correct !", HttpStatus.BAD_REQUEST),
     OTP_EXPIRED(1010, "Your otp is expired", HttpStatus.BAD_REQUEST ),
-    NEWS_NOT_EXISTED(1011, "News not existed", HttpStatus.BAD_REQUEST)
+    NEWS_NOT_EXISTED(1011, "News is  not existed", HttpStatus.BAD_REQUEST),
+    FACILITY_TYPE_NOT_EXIST(1012, "Facility type is not existed", HttpStatus.BAD_REQUEST),
+    FACILITY_TYPE_DELETE_ERROR(1013, "Deletion failed: the record is being referenced elsewhere.", HttpStatus.CONFLICT),
+    ACCOUNT_NOT_EXISTED(1014, "User don't have account", HttpStatus.BAD_REQUEST),
+    SUPPORT_INFO_NOT_EXISTED(1015, "Support info is not existed", HttpStatus.BAD_REQUEST),
+    FACILITY_NOT_EXIST(1016, "Facility not existed", HttpStatus.BAD_REQUEST),
+    INVOICE_NOT_EXIST(1017,"Don't have any invoice", HttpStatus.BAD_REQUEST),
+    REQUEST_NOT_EXIST(1018, "Join Request not existed", HttpStatus.BAD_REQUEST),
+
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

@@ -1,33 +1,34 @@
 package com.waterbilling.demo.dto.request;
 
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ServiceRegistrationRequest {
-	private String full_name;
-	private String phone_number;
-	private String email;
-	private String type;
-	public String getFull_name() {
-		return full_name;
-	}
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
-	}
-	public String getPhone_number() {
-		return phone_number;
-	}
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	
+
+	@NotBlank(message = "Họ và tên không được để trống")
+	@Size(max = 100, message = "Họ và tên không được quá 100 ký tự")
+	String name;
+
+	@NotBlank(message = "Số điện thoại không được để trống")
+	@Pattern(regexp = "^(0[1-9]{1}[0-9]{8})$", message = "Số điện thoại không đúng định dạng (ví dụ: 0123456789)")
+	String phoneNumber;
+
+	@NotBlank(message = "Email không được để trống")
+	@Email(message = "Email không đúng định dạng")
+	String email;
+
+	@NotBlank(message = "Loại dịch vụ không được để trống")
+	@Size(max = 50, message = "Loại dịch vụ không được quá 50 ký tự")
+	String facilityType;
+
 }

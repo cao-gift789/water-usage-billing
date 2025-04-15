@@ -4,6 +4,7 @@ import com.waterbilling.demo.dto.request.PermissionRequest;
 import com.waterbilling.demo.dto.response.ApiResponse;
 import com.waterbilling.demo.dto.response.PermissionResponse;
 import com.waterbilling.demo.service.PermissionService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +22,7 @@ public class PermissionController {
     PermissionService permissionService;
 
     @PostMapping
-    ApiResponse<PermissionResponse> create(@RequestBody PermissionRequest request) {
+    ApiResponse<PermissionResponse> create(@Valid @RequestBody PermissionRequest request) {
         return ApiResponse.<PermissionResponse>builder()
                 .result(permissionService.create(request))
                 .build();

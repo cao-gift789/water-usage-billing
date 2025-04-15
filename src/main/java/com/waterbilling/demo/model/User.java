@@ -25,7 +25,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @AllArgsConstructor
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @Entity
-@Table(name = "User")
+@Table(name = "User", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_user_email", columnNames = {"Email"}),
+        @UniqueConstraint(name = "uk_user_identity_number", columnNames = {"IdentityNumber"}),
+        @UniqueConstraint(name = "uk_user_phone_number", columnNames = {"PhoneNumber"})
+})
 public class User {
 
     @Id
@@ -51,15 +55,14 @@ public class User {
     @Column(name = "ProfilePicture", length = 255)
     String profilePicture;
 
-    @OneToOne
-    @JoinColumn(name = "AccountID", foreignKey = @ForeignKey(name = "fk_user_account"))
-    Account account;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    Facility facility;
+    @JoinColumn(name = "AccountID")
+    Integer accountId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    Set<Invoice> invoices = new HashSet<>();
+    Set<Facility> facilities;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    Set<LocationManager> locationManagers = new HashSet<>();
 
 //
 //	public Integer getUserId() {

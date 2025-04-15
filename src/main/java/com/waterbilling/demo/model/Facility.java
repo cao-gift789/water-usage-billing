@@ -33,7 +33,7 @@ public class Facility {
     @Column(name = "RegistrationDate", updatable = false)
     LocalDateTime registrationDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "OwnerId", foreignKey = @ForeignKey(name = "fk_facility_user"))
     User user;
 
@@ -57,6 +57,9 @@ public class Facility {
 
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<JoinRequest> joinRequests = new HashSet<>();
+
+    @ManyToMany(mappedBy = "facilities", fetch = FetchType.LAZY)
+    Set<Notification> notifications = new HashSet<>();
 
     @Column(name = "IsActive")
     Boolean isActive = true;

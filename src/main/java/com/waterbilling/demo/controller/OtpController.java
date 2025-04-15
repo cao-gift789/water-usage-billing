@@ -4,6 +4,7 @@ import com.waterbilling.demo.dto.request.ChangePasswordOtpRequest;
 import com.waterbilling.demo.dto.request.OtpRequest;
 import com.waterbilling.demo.dto.response.ApiResponse;
 import com.waterbilling.demo.service.OtpService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ public class OtpController {
     private OtpService otpService;
 
     @PostMapping("/generate")
-    public ApiResponse<String> generateOtp(@RequestBody OtpRequest request) {
+    public ApiResponse<String> generateOtp(@Valid @RequestBody OtpRequest request) {
         otpService.generateAndSendOtp(request);
         return ApiResponse.<String>builder()
                 .result("OTP đã được gửi đến email của bạn.")
@@ -26,7 +27,7 @@ public class OtpController {
     }
 
     @PostMapping("/change-password")
-    public ApiResponse<String> changePasswordWithOtp(@RequestBody ChangePasswordOtpRequest request) {
+    public ApiResponse<String> changePasswordWithOtp(@Valid  @RequestBody ChangePasswordOtpRequest request) {
         otpService.changePasswordWithOtp(request);
         return ApiResponse.<String>builder()
                 .result("Đổi mật khẩu thành công")

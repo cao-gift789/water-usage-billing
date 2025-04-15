@@ -16,7 +16,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FacilityTypeResponse {
 
-    Long typeId;
+    Integer typeId;
     String typeName;
     String calculationMethod;
     BigDecimal fixedPrice;

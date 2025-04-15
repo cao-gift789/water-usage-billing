@@ -17,7 +17,10 @@ import java.util.Set;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "Employee")
+@Table(name = "Employee", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_employ_email", columnNames = {"Email"}),
+        @UniqueConstraint(name = "uk_employ_phone_number", columnNames = {"PhoneNumber"})
+})
 public class Employee {
 
     @Id

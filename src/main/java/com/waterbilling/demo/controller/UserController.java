@@ -4,14 +4,10 @@ import com.waterbilling.demo.dto.request.UserRegistrionRequest;
 import com.waterbilling.demo.dto.request.UserUpdateRequest;
 import com.waterbilling.demo.dto.response.ApiResponse;
 import com.waterbilling.demo.dto.response.UserResponse;
-import com.waterbilling.demo.model.User;
 import com.waterbilling.demo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -21,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ApiResponse<?> registerUser(@RequestBody UserRegistrionRequest request) {
+    public ApiResponse<?> registerUser(@Valid @RequestBody UserRegistrionRequest request) {
 
         String result = userService.registerOrUpdateUser(request);
         return ApiResponse.<String>builder().result(result).build();
@@ -45,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<?> updateUser(@PathVariable Integer id, @RequestBody UserUpdateRequest request) {
+    public ApiResponse<?> updateUser(@PathVariable Integer id, @Valid @RequestBody UserUpdateRequest request) {
 
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUser(id, request))

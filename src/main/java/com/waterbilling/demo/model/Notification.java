@@ -41,9 +41,14 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "SenderID", foreignKey = @ForeignKey(name = "fk_notification_employee"))
     Employee employee;
-    
-    @OneToMany(mappedBy = "notification", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	Set<NotificationFacility> notificationFacilities = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @JoinTable(
+            name = "Notification_Facility",
+            joinColumns = @JoinColumn(name = "NotificationID"),
+            inverseJoinColumns = @JoinColumn(name = "FacilityID")
+    )
+    Set<Facility> facilities = new HashSet<>();
 
 //	public Integer getNotificationId() {
 //		return notificationId;

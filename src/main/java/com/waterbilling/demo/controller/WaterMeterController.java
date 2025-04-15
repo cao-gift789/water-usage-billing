@@ -12,8 +12,4 @@ public class WaterMeterController {
     @Autowired
     private WaterMeterService waterMeterService;
 
-    @PostMapping
-    public WaterMeter createWaterMeter(@RequestBody WaterMeter waterMeter) {
-        return waterMeterService.saveWaterMeter(waterMeter);
-    }
 }

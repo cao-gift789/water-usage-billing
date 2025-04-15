@@ -10,6 +10,7 @@ import com.waterbilling.demo.service.AccountService;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class AccountController {
 
     @PreAuthorize("hasRole('User')")
     @PostMapping("/change-password")
-    public ApiResponse<?> changePassword(@RequestBody ChangePasswordRequest request) {
+    public ApiResponse<?> changePassword(@Valid @RequestBody ChangePasswordRequest request) {
         accountService.changePassword(request);
         return ApiResponse.<String>builder()
                 .result("Đổi mật khẩu thành công")

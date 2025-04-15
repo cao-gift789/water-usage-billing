@@ -11,13 +11,34 @@ import java.util.List;
 public class EmployeeService {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    EmployeeRepository employeeRepository;
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public Employee create(Employee employee) {
+
+        return employeeRepository.save(employee);
     }
 
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee findById(Integer id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
+
+    public Employee update(Integer id, Employee employee) {
+        Employee existing = findById(id);
+
+        existing.setFullName(employee.getFullName());
+        existing.setPhoneNumber(employee.getPhoneNumber());
+        existing.setAddress(employee.getAddress());
+        existing.setEmail(employee.getEmail());
+        existing.setAccount(employee.getAccount());
+        existing.setStartDate(employee.getStartDate());
+        existing.setIsActive(employee.getIsActive());
+        existing.setImage(employee.getImage());
+        return employeeRepository.save(existing);
+    }
+
+    public void delete(Integer id) {
+        Employee employee = findById(id);
+        employeeRepository.delete(employee);
     }
 }

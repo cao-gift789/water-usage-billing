@@ -28,8 +28,7 @@ public class ServiceRegistration {
 	@Column(name="email")
 	String email;
 
-	@ManyToOne
-	@JoinColumn(name = "facilityTypeID")
-	FacilityType facilityType;
+	@Column(name = "facilityType")
+	String facilityType;
 
 }

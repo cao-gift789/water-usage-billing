@@ -131,7 +131,7 @@ public class AuthenticationService {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(account.getUsername())
+                .subject(String.valueOf(account.getAccountId()))
                 .issuer("waterbilling.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(

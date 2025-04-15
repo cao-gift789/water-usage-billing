@@ -33,12 +33,7 @@ public class FacilityType {
     
     @OneToMany(mappedBy = "facilityType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Facility> facilities =new HashSet<>();
-    
-    @OneToMany(mappedBy = "facilityType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    Set<PricingTiers> pricingTiers =new HashSet<>();
-    
-    @OneToOne(mappedBy = "facilityType", cascade = CascadeType.ALL)
-    FixedPricing fixedPricing;
+
 
     public enum CalculationMethod {
         Fixed, Tiered

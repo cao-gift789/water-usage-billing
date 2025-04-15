@@ -3,6 +3,9 @@ package com.waterbilling.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.waterbilling.demo.dto.request.NotificationTypeRequest;
+import com.waterbilling.demo.model.Notification;
+import com.waterbilling.demo.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +17,16 @@ import com.waterbilling.demo.repository.FacilityRepository;
 public class NotificationService {
 	@Autowired
 	private FacilityRepository facilityRepository;
-	public List<NotificationResponse> findNotification(Integer facilitiid){
-		List<NotificationResponse> notificationResponses =new ArrayList<>();
-		Facility facility=facilityRepository.getById(facilitiid);
-		for(NotificationFacility notificationFacility: facility.getNotificationFacilities()) {
-			NotificationResponse nf =new NotificationResponse();
-			nf.setStatus(notificationFacility.getStatus());
-			nf.setCreatedDate(notificationFacility.getNotification().getCreatedDate());
-			nf.setConten(notificationFacility.getNotification().getContent());
-			nf.setTypeName(notificationFacility.getNotification().getNotificationType().getTypeName());
-			notificationResponses.add(nf);
-		}
-		return notificationResponses;
-	}
+
+    @Autowired
+    private NotificationRepository notificationRepository;
+
+
+    public Notification create(Notification notification) {
+        return notificationRepository.save(notification);
+    }
+
+
+
+
 }

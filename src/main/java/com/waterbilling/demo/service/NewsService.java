@@ -14,6 +14,8 @@ import com.waterbilling.demo.model.Employee;
 import com.waterbilling.demo.repository.AccountRepository;
 import com.waterbilling.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -32,31 +34,20 @@ public class NewsService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public List<NewsResponse> findAllNews () {
-		List<News> resultList = newsRepository.findAll();
+//	public Page<NewsResponse> getAllNews(String search, Boolean status, Integer createdById, Pageable pageable) {
+//		return newsRepository.findAllNews(search, status, createdById, pageable);
+//	}
 
-		List<NewsResponse> listNewsResponse = resultList.stream()
-				.map(news -> NewsResponse.builder()
-						.id(news.getNewsId())
-						.content(news.getContent())
-						.title(news.getTitle())
-						.createdDate(news.getCreatedDate())
-						.nameEmployee(news.getEmployee().getFullName())
-						.build())
-				.collect(Collectors.toList());
-
-		return listNewsResponse;
-	}
 
 	public NewsResponse findNewsById(Integer id) {
 		News news = newsRepository.findById(id)
 				.orElseThrow(() -> new AppException(ErrorCode.NEWS_NOT_EXISTED));
 		return NewsResponse.builder()
-				.id(news.getNewsId())
+				.newsId(news.getNewsId())
 				.content(news.getContent())
 				.title(news.getTitle())
 				.createdDate(news.getCreatedDate())
-				.nameEmployee(news.getEmployee().getFullName())
+				.createdById(news.getEmployee().getEmployeeId())
 				.build();
 	}
 
@@ -78,11 +69,11 @@ public class NewsService {
 		newsRepository.save(news);
 
 		return NewsResponse.builder()
-				.id(news.getNewsId())
+				.newsId(news.getNewsId())
 				.content(news.getContent())
 				.title(news.getTitle())
 				.createdDate(news.getCreatedDate())
-				.nameEmployee(news.getEmployee().getFullName())
+				.createdById(news.getEmployee().getEmployeeId())
 				.build();
 	}
 
@@ -96,11 +87,11 @@ public class NewsService {
 		newsRepository.save(news);
 
 		return NewsResponse.builder()
-				.id(news.getNewsId())
+				.newsId(news.getNewsId())
 				.content(news.getContent())
 				.title(news.getTitle())
 				.createdDate(news.getCreatedDate())
-				.nameEmployee(news.getEmployee().getFullName())
+				.createdById(news.getEmployee().getEmployeeId())
 				.build();
 
 	}

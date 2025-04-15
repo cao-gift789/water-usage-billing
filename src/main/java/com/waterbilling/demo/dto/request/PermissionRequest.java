@@ -1,5 +1,6 @@
 package com.waterbilling.demo.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PermissionRequest {
 
+    @NotBlank(message = "Tên quyền không được bỏ trống!")
     String permissionName;
     String description;
 

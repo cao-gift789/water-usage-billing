@@ -14,14 +14,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
     Optional<User> findByIdentityNumber(String identityNumber);
     Optional<User> findByPhoneNumber(String phoneNumber);
+    Optional<User> findByAccountId(Integer accountId);
 
-    @Procedure(procedureName = "RegisterOrUpdateUserWithAccount", outputParameterName = "p_message")
-    String registerOrUpdateUserWithAccount(
-            @Param("p_identity_number") String identityNumber,
-            @Param("p_email") String email,
-            @Param("p_phone_number") String phoneNumber,
-            @Param("p_full_name") String fullName,
-            @Param("p_password") String password,
-            @Param("p_username") String username
-    );
+    int countByIdentityNumber(String identityNumber);
+
 }

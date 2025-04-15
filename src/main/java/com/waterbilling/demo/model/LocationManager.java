@@ -13,11 +13,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "LocationManager")
+@Table(name = "LocationManager",
+        uniqueConstraints = @UniqueConstraint(name = "uk_locationmanager_user_facility",
+                columnNames = {"UserID", "FacilityID"}))
 public class LocationManager {
 
-    
-	@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
+
     @ManyToOne
     @JoinColumn(name = "UserID", foreignKey = @ForeignKey(name = "fk_locationmanager_user"))
     User user;

@@ -1,44 +1,25 @@
 package com.waterbilling.demo.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
-import com.waterbilling.demo.model.NotificationFacility.NotificationStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class NotificationResponse {
-	private String conten;
-	private LocalDateTime createdDate;
-	private NotificationStatus status;
-	private String typeName;
-	
-	public String getConten() {
-		return conten;
-	}
-	public void setConten(String conten) {
-		this.conten = conten;
-	}
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	public NotificationStatus getStatus() {
-		return status;
-	}
-	public void setStatus(NotificationStatus status) {
-		this.status = status;
-	}
-	public String getTypeName() {
-		return typeName;
-	}
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
-	
-	
-	
-	
-	
+
+	Integer notificationId;
+	LocalDateTime createdDate;
+	String title;
+	String content;
+	String notificationType;
+	String senderName;
+
 }

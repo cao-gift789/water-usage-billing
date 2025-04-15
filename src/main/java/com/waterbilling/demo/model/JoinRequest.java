@@ -6,8 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
-import com.waterbilling.demo.enums.JoinStatus;
-import com.waterbilling.demo.model.Invoice.InvoiceStatus;
+
 
 
 @Getter
@@ -35,16 +34,6 @@ public class JoinRequest {
 
     @Column(name = "RequestDate", updatable = false)
     LocalDateTime requestDate;
-
-    @Column(name = "Note", columnDefinition = "TEXT")
-    String note;
-
-    @Column(name = "ProcessedDate", columnDefinition = "TEXT")
-    String processedDate;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Status", nullable = false)
-    JoinStatus status;
 
 
 //    public void setRequestId(Integer requestId) {

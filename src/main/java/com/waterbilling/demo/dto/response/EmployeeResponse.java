@@ -18,16 +18,8 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmployeeResponse {
 
+    Integer employeeId;
     String fullName;
-    String phoneNumber;
-    String address;
     String email;
-    Account account;
-    LocalDateTime startDate;
-    Set<News> news =new HashSet<>();
-    Set<Notification> notifications =new HashSet<>();
-    Set<WaterMeterReading> waterMeterReadings = new HashSet<>();
-    Set<Invoice> invoices =new HashSet<>();
-    String image;
 
 }

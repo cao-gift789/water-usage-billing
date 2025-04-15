@@ -1,6 +1,7 @@
 package com.waterbilling.demo.dto.response;
 import java.util.Set;
 public class MemberInformationResponese {
+
 	private String name;
 	private Integer facilityCode;
 	private String address;

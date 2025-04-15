@@ -12,6 +12,5 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     Optional<Account> findByUsername(String username);
-    List<Account> findByUsernameAndPassword(String username,String password);
-    boolean existsByUsername(String username);
+    int countByUsername(String username);
 }

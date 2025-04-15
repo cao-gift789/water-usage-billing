@@ -19,7 +19,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @AllArgsConstructor
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @Entity
-@Table(name = "WaterMeter")
+@Table(name = "WaterMeter",uniqueConstraints = {
+        @UniqueConstraint(name = "uk_watermeter_serial_number", columnNames = {"SerialNumber"}),
+
+})
 public class WaterMeter {
 
     @Id

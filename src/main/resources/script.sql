@@ -303,4 +303,67 @@ INSERT INTO JoinRequest (UserID, FacilityID, RequestDate, Note) VALUES
 --DELIMITER ;
 
 
--- Nhân viên đang làm, tối sẽ cập nhật sớm cho ae
+-- Quản lý Nhân viên
+
+--Xem nhân viên
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_get_all_employees()
+--BEGIN
+--    SELECT 
+--        e.EmployeeID, e.FullName, e.Email, e.PhoneNumber,
+--        a.Username, r.RoleName, e.IsActive
+--    FROM employee e
+--    JOIN account a ON e.AccountID = a.AccountID
+--    JOIN role r ON a.RoleID = r.RoleID;
+--END $$
+--
+--DELIMITER ;
+
+
+--Thêm tài khoản
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_add_account(
+--    IN p_username VARCHAR(50),
+--    IN p_password VARCHAR(255),
+--    IN p_roleId INT
+--)
+--BEGIN
+--    INSERT INTO account (Username, Password, RoleID, RegistrationDate)
+--    VALUES (p_username, p_password, p_roleId, NOW());
+--END $$
+--
+--DELIMITER ;
+
+
+--Thay đổi mật khẩu
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_change_password(
+--    IN p_accountId INT,
+--    IN p_newPassword VARCHAR(255)
+--)
+--BEGIN
+--    UPDATE account
+--    SET Password = p_newPassword
+--    WHERE AccountID = p_accountId;
+--END $$
+--
+--DELIMITER ;
+--
+
+--Dừng hoạt động
+--DELIMITER $$
+--
+--CREATE PROCEDURE sp_deactivate_employee(
+--    IN p_employeeId INT
+--)
+--BEGIN
+--    UPDATE employee
+--    SET IsActive = 0
+--    WHERE EmployeeID = p_employeeId;
+--END $$
+--
+--DELIMITER ;
+
